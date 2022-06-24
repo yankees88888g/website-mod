@@ -3,6 +3,7 @@ package net.web.fabric.http.website;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import net.web.fabric.config.file;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -13,8 +14,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 public class website {
     ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
-        public static void main() throws IOException {
-            HttpServer server = HttpServer.create(new InetSocketAddress("localhost", 8001), 0);
+        public static void main(int port) throws IOException {
+            HttpServer server = HttpServer.create(new InetSocketAddress("localhost", port), 0);
             HttpContext context = server.createContext("/");
             context.setHandler(website::handleRequest);
             server.start();
