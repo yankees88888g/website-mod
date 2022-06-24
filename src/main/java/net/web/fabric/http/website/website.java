@@ -15,7 +15,7 @@ public class website {
     ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
         public static void main(int port) throws IOException {
-            HttpServer server = HttpServer.create(new InetSocketAddress("localhost", port), 0);
+            HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
             HttpContext context = server.createContext("/");
             context.setHandler(website::handleRequest);
             server.start();

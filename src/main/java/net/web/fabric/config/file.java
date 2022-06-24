@@ -3,13 +3,13 @@ package net.web.fabric.config;
 import net.web.fabric.http.website.website;
 
 import java.io.*;
-import java.net.URL;
 import java.util.Properties;
 
 import static net.web.fabric.config.firstTime.fst;
 
 public class file {
     public static int port = 8001;
+    public static int maport = 8192;
     public static void main() {
         try {
 
@@ -22,7 +22,8 @@ public class file {
                     Properties prop=new Properties();
                     prop.load(reader);
                     Integer port = Integer.parseInt(prop.getProperty("port"));
-                    String name = prop.getProperty("name");
+                    String map = prop.getProperty("map");
+                    Integer maport = Integer.parseInt(prop.getProperty("maport"));
                     try {
                         website.main(port);
                     } catch (IOException e) {
