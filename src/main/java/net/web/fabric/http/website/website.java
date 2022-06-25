@@ -14,8 +14,11 @@ import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
+import static net.web.fabric.main.mainHtmlFile;
+
 
 public class website {
+
     ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
         public static void main(int port) throws IOException {
@@ -27,11 +30,12 @@ public class website {
 
         private static void handleRequest(HttpExchange exchange) throws IOException {
 
-            String response = htl.htl;
+            //String response = htl.htl;
 
-            exchange.sendResponseHeaders(200, response.getBytes().length);//response code and length
+            exchange.sendResponseHeaders(200, mainHtmlFile.length);
             OutputStream os = exchange.getResponseBody();
-            os.write(response.getBytes());
+            os.write(mainHtmlFile);
+            //os.write(response.getBytes());
             os.close();
     }
-}
+}//InputStream is = website.class.getResourceAsStream("about_us.html");

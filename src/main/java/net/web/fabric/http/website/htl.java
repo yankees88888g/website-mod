@@ -3,7 +3,7 @@ package net.web.fabric.http.website;
 import net.web.fabric.config.file;
 
 public class htl{
-    private static boolean booMap = true;//TODO set to false when other TODO is down
+    private static boolean booMap = true;//TODO set to false when other TODO is done
     static String map = "<li><a href=" + file.maplink + ">Map</a></li>";
     public static String htl =
             """
