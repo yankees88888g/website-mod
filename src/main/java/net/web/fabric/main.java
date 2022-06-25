@@ -2,13 +2,9 @@ package net.web.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.web.fabric.config.file;
-//import net.web.fabric.http.website.htl;
 import net.web.fabric.http.website.inputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 
 

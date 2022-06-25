@@ -7,16 +7,10 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
 
-import static net.web.fabric.http.website.inputStream.aboutHtmlFile;
-import static net.web.fabric.http.website.inputStream.mainHtmlFile;
-
+import static net.web.fabric.http.website.inputStream.*;
 
 public class website {
-
-    ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
     public static void main(int port) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
@@ -26,9 +20,9 @@ public class website {
         HttpContext context_about = server.createContext("/about_us");
         context_about.setHandler(website::handleAbout);
 
-        /*HttpContext context_map = server.createContext("/about_us");
-        context_map.setHandler(website::handleMap);*/
-        //TODO set this configurable with dynamp and other map mods to redirect to here.
+        HttpContext context_map = server.createContext("/map");
+        context_map.setHandler(website::handleMap);
+        //to be able to configurable with dynamp and other map mods to redirect to here.
 
         server.start();
     }
@@ -45,6 +39,13 @@ public class website {
         exchange.sendResponseHeaders(200, aboutHtmlFile.length);
         OutputStream os = exchange.getResponseBody();
         os.write(aboutHtmlFile);
+        os.close();
+    }
+
+    private static void handleMap(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200, mapHtmlFile.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(mapHtmlFile);
         os.close();
     }
 }
