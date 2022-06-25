@@ -18,10 +18,10 @@ public class file {
         try {
 
             try {
-                File f = new File("web.config");
+                File f = new File("config/web.config");
                 if(f.exists() && f.isFile()) {
 
-                    FileReader reader=new FileReader("web.config");
+                    FileReader reader=new FileReader("config/web.config");
 
                     Properties prop=new Properties();
                     prop.load(reader);

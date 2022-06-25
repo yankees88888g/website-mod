@@ -23,7 +23,7 @@
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "website-mod.json"
   ],
 
   "depends": {
