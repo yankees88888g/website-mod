@@ -2,11 +2,9 @@ package net.web.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.web.fabric.config.file;
+import net.web.fabric.http.website.htl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import net.web.fabric.http.website.website;
-
-import java.io.IOException;
 
 public class main implements ModInitializer {
 	// This logger is used to write text to the console and the log file.

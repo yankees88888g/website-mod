@@ -1,5 +1,6 @@
 package net.web.fabric.config;
 
+import net.web.fabric.http.website.htl;
 import net.web.fabric.http.website.website;
 
 import java.io.*;
@@ -9,7 +10,10 @@ import static net.web.fabric.config.firstTime.fst;
 
 public class file {
     public static int port = 8001;
-    public static int maport = 8192;
+
+    public static boolean map =  false;
+    public static String maplink = "replace this with your ip";
+
     public static void main() {
         try {
 
@@ -22,8 +26,8 @@ public class file {
                     Properties prop=new Properties();
                     prop.load(reader);
                     Integer port = Integer.parseInt(prop.getProperty("port"));
-                    String map = prop.getProperty("map");
-                    Integer maport = Integer.parseInt(prop.getProperty("maport"));
+                    boolean map = Boolean.parseBoolean(prop.getProperty("map"));
+                    String maplink = prop.getProperty("maplink");
                     try {
                         website.main(port);
                     } catch (IOException e) {

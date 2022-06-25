@@ -3,13 +3,17 @@ package net.web.fabric.http.website;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import net.web.fabric.config.file;
+
+import javax.script.*;
+import javax.script.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+
 
 public class website {
     ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
@@ -22,7 +26,9 @@ public class website {
         }
 
         private static void handleRequest(HttpExchange exchange) throws IOException {
-            String response = "Welcome from Server!";
+
+            String response = htl.htl;
+
             exchange.sendResponseHeaders(200, response.getBytes().length);//response code and length
             OutputStream os = exchange.getResponseBody();
             os.write(response.getBytes());
