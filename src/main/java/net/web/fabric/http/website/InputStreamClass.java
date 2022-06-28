@@ -7,6 +7,7 @@ import java.io.*;
 public class InputStreamClass {
 
     public static byte[] mainHtmlFile;
+    public static byte[] customHomePage;
     public static byte[] aboutHtmlFile;
     public static byte[] mapHtmlFile;
 
@@ -26,6 +27,17 @@ public class InputStreamClass {
             }
             InputStream is2 = new FileInputStream(file);
             aboutHtmlFile = is2.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        try {
+            new File("config/html");
+            File file = new File("config/html/custom.html");
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            InputStream is3 = new FileInputStream(file);
+            customHomePage = is3.readAllBytes();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -53,14 +65,14 @@ public class InputStreamClass {
                 throw new RuntimeException(e);
             }
         }
-        InputStream is3 = null;
+        InputStream ism = null;
         try {
-            is3 = new FileInputStream(file);
+            ism = new FileInputStream(file);
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
         try {
-            mapHtmlFile = is3.readAllBytes();
+            mapHtmlFile = ism.readAllBytes();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

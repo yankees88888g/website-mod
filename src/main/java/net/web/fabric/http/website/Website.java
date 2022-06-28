@@ -12,10 +12,14 @@ import static net.web.fabric.http.website.InputStreamClass.*;
 
 public class Website {
 
-    public static void main(int port) throws IOException {
+    public static void main(int port, boolean homepage) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         HttpContext context = server.createContext("/");
-        context.setHandler(Website::handleRequest);
+        if(homepage == false) {
+            context.setHandler(Website::handleRequest);
+        }else{
+            context.setHandler(Website::handleCustom);
+        }
 
         HttpContext context_about = server.createContext("/about_us");
         context_about.setHandler(Website::handleAbout);
@@ -32,6 +36,13 @@ public class Website {
         exchange.sendResponseHeaders(200, mainHtmlFile.length);
         OutputStream os = exchange.getResponseBody();
         os.write(mainHtmlFile);
+        os.close();
+    }
+
+    private static void handleCustom(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200, customHomePage.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(customHomePage);
         os.close();
     }
 
