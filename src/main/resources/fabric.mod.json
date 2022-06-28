@@ -19,7 +19,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.web.fabric.main"
+      "net.web.fabric.WebMain"
     ]
   },
   "mixins": [

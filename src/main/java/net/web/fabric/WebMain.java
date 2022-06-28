@@ -1,14 +1,14 @@
 package net.web.fabric;
 
 import net.fabricmc.api.ModInitializer;
-import net.web.fabric.config.file;
-import net.web.fabric.http.website.inputStream;
+import net.web.fabric.config.File;
+import net.web.fabric.http.website.InputStreamClass;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 
-public class main implements ModInitializer {
+public class WebMain implements ModInitializer {
 
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
@@ -21,7 +21,7 @@ public class main implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		LOGGER.info("Hello Fabric world!");
-		inputStream.main();
-		file.main();
+		InputStreamClass.main();
+		File.main();
 	}
 }

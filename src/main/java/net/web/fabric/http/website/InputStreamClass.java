@@ -4,7 +4,7 @@ import net.fabricmc.loader.api.FabricLoader;
 
 import java.io.*;
 
-public class inputStream {
+public class InputStreamClass {
 
     public static byte[] mainHtmlFile;
     public static byte[] aboutHtmlFile;
@@ -12,7 +12,7 @@ public class inputStream {
 
     public static void main() {
 
-        InputStream is = inputStream.class.getClassLoader().getResourceAsStream("html/main.html");
+        InputStream is = InputStreamClass.class.getClassLoader().getResourceAsStream("html/main.html");
         try {
             mainHtmlFile = is.readAllBytes();
         } catch (IOException e) {
@@ -20,7 +20,7 @@ public class inputStream {
         }
         try {
             new File("config/html").mkdirs();
-            File file = FabricLoader.getInstance().getConfigDir().resolve("html").resolve("about_us.html").toFile();
+            File file = new File("config/html/about_us.html");
             if (!file.exists()) {
                 file.createNewFile();
             }
@@ -29,7 +29,7 @@ public class inputStream {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-        File file = FabricLoader.getInstance().getConfigDir().resolve("html").resolve("map.html").toFile();
+        File file = new File("config/html/map.html");
         if (!file.exists()) {
             try {
                 file.createNewFile();
