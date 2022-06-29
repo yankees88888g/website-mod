@@ -10,6 +10,7 @@ public class InputStreamClass {
     public static byte[] customHomePage;
     public static byte[] aboutHtmlFile;
     public static byte[] mapHtmlFile;
+    public static byte[] loginHtmlFile;
 
     public static void main() {
 
@@ -73,6 +74,12 @@ public class InputStreamClass {
         }
         try {
             mapHtmlFile = ism.readAllBytes();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        InputStream is4 = InputStreamClass.class.getClassLoader().getResourceAsStream("login/login-page.html");
+        try {
+            loginHtmlFile = is4.readAllBytes();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -28,6 +28,9 @@ public class Website {
         context_map.setHandler(Website::handleMap);
         //to be able to configurable with dynamp and other map mods to redirect to here.
 
+        HttpContext context_login = server.createContext("/login");
+        context_login.setHandler(Website::handleLogin);
+
         server.start();
     }
 
@@ -57,6 +60,13 @@ public class Website {
         exchange.sendResponseHeaders(200, mapHtmlFile.length);
         OutputStream os = exchange.getResponseBody();
         os.write(mapHtmlFile);
+        os.close();
+    }
+
+    private static void handleLogin(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200, loginHtmlFile.length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(loginHtmlFile);
         os.close();
     }
 }
