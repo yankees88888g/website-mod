@@ -1,107 +1,62 @@
 package net.web.fabric.mod.menu;
-//from mod menu with some editing https://github.com/TerraformersMC/ModMenu/blob/1.18/src/main/java/com/terraformersmc/modmenu/util/mod/Mod.java
 
-import com.sun.java.accessibility.util.Translator;
-import net.minecraft.client.texture.NativeImageBackedTexture;
 import net.minecraft.text.Text;
-import net.minecraft.text.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public interface Mod {
-    @NotNull
-    String getId();
+    public interface Mod {
+        @NotNull String getType();
 
-    @NotNull
-    String getName();
+        @NotNull
+        String getId();
 
-    @NotNull
-    NativeImageBackedTexture getIcon(FabricIconHandler iconHandler, int i);
+        @NotNull
+        String getName();
 
-    @NotNull
-    String getSummary();
+        //@NotNull
+        //NativeImageBackedTexture getIcon(FabricIconHandler iconHandler, int i);
 
-    @NotNull
-    String getDescription();
+        @NotNull
+        String getSummary();
 
-    @NotNull
-    String getVersion();
+        @NotNull
+        String getDescription();
 
-    @NotNull
-    String getPrefixedVersion();
+        @NotNull
+        String getVersion();
 
-    @NotNull
-    List<String> getAuthors();
+        @NotNull
+        String getPrefixedVersion();
 
-    @NotNull
-    List<String> getContributors();
+        @NotNull
+        List<String> getAuthors();
 
-    @NotNull
-    List<String> getCredits();
+        @NotNull
+        List<String> getContributors();
 
-    @NotNull
-    Set<Badge> getBadges();
+        @NotNull
+        List<String> getCredits();
 
-    @Nullable
-    String getWebsite();
+        @Nullable
+        String getWebsite();
 
-    @Nullable
-    String getIssueTracker();
+        @Nullable
+        String getIssueTracker();
 
-    @Nullable
-    String getSource();
+        @Nullable
+        String getSource();
 
-    @Nullable
-    String getParent();
+        @Nullable
+        String getParent();
 
-    @NotNull
-    Set<String> getLicense();
+        @NotNull
+        Set<String> getLicense();
 
-    @NotNull
-    Map<String, String> getLinks();
+        @NotNull
+        Map<String, String> getLinks();
 
-    boolean isReal();
-
-    enum Badge {
-        LIBRARY("modmenu.badge.library", 0xff107454, 0xff093929, "library"),
-        CLIENT("modmenu.badge.clientsideOnly", 0xff2b4b7c, 0xff0e2a55, null),
-        DEPRECATED("modmenu.badge.deprecated", 0xff841426, 0xff530C17, "deprecated"),
-        PATCHWORK_FORGE("modmenu.badge.forge", 0xff1f2d42, 0xff101721, null),
-        MINECRAFT("modmenu.badge.minecraft", 0xff6f6c6a, 0xff31302f, null);
-
-        private final Text text;
-        private final int outlineColor, fillColor;
-        private final String key;
-        private static final Map<String, Badge> KEY_MAP = new HashMap<>();
-
-        Badge(String translationKey, int outlineColor, int fillColor, String key) {
-            this.text = Text.translatable(translationKey);
-            this.outlineColor = outlineColor;
-            this.fillColor = fillColor;
-            this.key = key;
-        }
-
-        public Text getText() {
-            return this.text;
-        }
-
-        public int getOutlineColor() {
-            return this.outlineColor;
-        }
-
-        public int getFillColor() {
-            return this.fillColor;
-        }
-
-        public static Set<Badge> convert(Set<String> badgeKeys) {
-            return badgeKeys.stream().map(KEY_MAP::get).collect(Collectors.toSet());
-        }
-
-        static {
-            Arrays.stream(values()).forEach(badge -> KEY_MAP.put(badge.key, badge));
-        }
     }
-}

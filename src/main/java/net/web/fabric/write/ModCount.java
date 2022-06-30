@@ -1,6 +1,6 @@
 package net.web.fabric.write;
 
-import net.web.fabric.mod.menu.ModMenu;
+import net.web.fabric.mod.menu.List;
 
 public class ModCount {
     public static String Count =
@@ -14,7 +14,7 @@ public class ModCount {
                     "<h2>\n" +
                     "Mods loaded\n" +
                     "</h2>" +
-                    ModMenu.getDisplayedModCount() +
+                    List.count() +
                     "</body>\n" +
                     "</html>";
 }

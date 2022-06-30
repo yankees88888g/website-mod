@@ -1,13 +1,11 @@
 package net.web.fabric;
 
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 import net.web.fabric.config.File;
-import net.web.fabric.http.website.InputStreamClass;
-import net.web.fabric.mod.menu.ModMenu;
-import net.web.fabric.write.ModCount;
+import net.web.fabric.mod.menu.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 
 public class WebMain implements ModInitializer {
@@ -22,9 +20,20 @@ public class WebMain implements ModInitializer {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
+		LOGGER.info(strArrayToStr(List.name()));
+		LOGGER.info(String.valueOf(List.count()));
 		LOGGER.info("Hello Fabric world!");
-		ModMenu.onStart();
-		LOGGER.info(String.valueOf(ModMenu.getDisplayedModCount()));
+		LOGGER.info(String.valueOf(List.name().length));
+		LOGGER.info(String.valueOf(FabricLoader.getInstance().getAllMods()));
 		File.main();
+	}
+
+	private String strArrayToStr(String[] array) {
+		StringBuffer sb = new StringBuffer();
+		for(int i = 0; i < array.length; i++) {
+			sb.append(array[i]);
+		}
+		String str = sb.toString();
+		return str;
 	}
 }

@@ -32,6 +32,7 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 	// Use JUnit test framework
+
 }
 
 processResources {
