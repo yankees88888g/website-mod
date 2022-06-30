@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "website_mod",
   "version": "${version}",
 
   "name": "website Mod",
@@ -14,7 +14,7 @@
   },
 
   "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/Websitemod/icon.png",
 
   "environment": "*",
   "entrypoints": {

@@ -3,6 +3,8 @@ package net.web.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.web.fabric.config.File;
 import net.web.fabric.http.website.InputStreamClass;
+import net.web.fabric.mod.menu.ModMenu;
+import net.web.fabric.write.ModCount;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +23,8 @@ public class WebMain implements ModInitializer {
 		// However, some things (like resources) may still be uninitialized.
 		// Proceed with mild caution.
 		LOGGER.info("Hello Fabric world!");
-		InputStreamClass.main();
+		ModMenu.onStart();
+		LOGGER.info(String.valueOf(ModMenu.getDisplayedModCount()));
 		File.main();
 	}
 }
