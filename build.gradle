@@ -32,7 +32,9 @@ dependencies {
 
 	// modImplementation "net.fabricmc.fabric-api:fabric-api-deprecated:${project.fabric_version}"
 	// Use JUnit test framework
-
+	// https://mvnrepository.com/artifact/org.jasypt/jasypt
+	implementation group: 'org.jasypt', name: 'jasypt', version: '1.9.2'
+	//for encrypting passwords
 }
 
 processResources {

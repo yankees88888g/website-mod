@@ -9,6 +9,7 @@ loginButton.addEventListener("click", (e) => {
     // Get the values input by the user in the form fields
     const username = loginForm.username.value;
     const password = loginForm.password.value;
+    checkCred(username,password)
 
     if (username === "user" && password === "web_dev") {
         // If the credentials are valid, show an alert box and reload the page
@@ -18,3 +19,9 @@ loginButton.addEventListener("click", (e) => {
         // Otherwise, make the login error message show (change its oppacity)
         loginErrorMsg.style.opacity = 1;
     }
+    function checkCred (a, b){ 
+        return {
+            result: net.web.fabric.js.cred.Encryption.read (a, b) 
+            }; 
+    }
+})

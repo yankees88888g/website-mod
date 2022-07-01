@@ -1,7 +1,6 @@
 package net.web.fabric.mod.menu;
 
 import net.fabricmc.loader.api.FabricLoader;
-import net.fabricmc.loader.api.metadata.ModMetadata;
 
 import java.util.ArrayList;
 
