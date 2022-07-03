@@ -1,5 +1,4 @@
-const loginForm = document.getElementById("login-form");
-const loginButton = document.getElementById("login-form-submit");
+const loginButton = document.getElementById("submit");
 const loginErrorMsg = document.getElementById("login-error-msg");
 
 // When the login button is clicked, the following code is executed
@@ -7,21 +6,27 @@ loginButton.addEventListener("click", (e) => {
     // Prevent the default submission of the form
     e.preventDefault();
     // Get the values input by the user in the form fields
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
-    checkCred(username,password)
+    
+    const username = document.getElementById("username-field").value;
+    const password = document.getElementById("password-field").value;
+    const x = username + "⣆⭐⦩≽" + password;    
 
-    if (username === "user" && password === "web_dev") {
-        // If the credentials are valid, show an alert box and reload the page
-        alert("You have successfully logged in.");
-        location.reload();
-    } else {
-        // Otherwise, make the login error message show (change its oppacity)
-        loginErrorMsg.style.opacity = 1;
-    }
-    function checkCred (a, b){ 
-        return {
-            result: net.web.fabric.js.cred.Encryption.read (a, b) 
-            }; 
-    }
+    fetch('/login', {
+  method: 'POST',
+  headers: {
+    'Authorization': 'MySuperCoolKey123',
+    'content-type': 'application/json'
+  },
+  body: JSON.stringify({
+    x
+  })
+}).then(data => {
+    console.log(data);
+  });
+  if (fetch == true) {
+    
+      alert("loged in")
+  }else{
+    alert("nope")
+  }
 })

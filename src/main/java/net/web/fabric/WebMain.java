@@ -20,14 +20,14 @@ public class WebMain implements ModInitializer {
 
 	@Override
 	public void onInitialize() {
-		//Encryption.write("test","twe");
+		Encryption.write("test","twe");
 		LOGGER.info(strArrayToStr(List.name()));
 		LOGGER.info(valueOf(List.count()));
 		LOGGER.info("Hello Fabric world!");
 		LOGGER.info(valueOf(List.name().length));
 		LOGGER.info(valueOf(FabricLoader.getInstance().getAllMods()));
 		File.main();
-		//LOGGER.info(valueOf(Encryption.read("test","twe")));
+		LOGGER.info(valueOf(Encryption.read("test","twe")));
 	}
 
 	private String strArrayToStr(String[] array) {
