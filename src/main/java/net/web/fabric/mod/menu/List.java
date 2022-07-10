@@ -1,6 +1,7 @@
 package net.web.fabric.mod.menu;
 
 import net.fabricmc.loader.api.FabricLoader;
+import org.apache.logging.log4j.core.util.ArrayUtils;
 
 import java.util.ArrayList;
 
@@ -20,35 +21,41 @@ public class List {
             if (array[i] != null)
                 counter++;
         }
-        return counter-33;
+        return counter - 33;
     }
 
-    public static String[] desc(){
+    public static String[] desc() {
         ArrayList<String> des = new ArrayList<String>();
-        for(int i =0; i < FabricLoader.getInstance().getAllMods().stream().toList().size(); i++) {
+        for (int i = 0; i < FabricLoader.getInstance().getAllMods().stream().toList().size(); i++) {
             if (FabricLoader.getInstance().getAllMods().stream().toList().get(i) != null)
                 des.add(FabricLoader.getInstance().getAllMods().stream().toList().get(i).getMetadata().getDescription());
         }
         StringBuilder sb = new StringBuilder();
-        for (String s : des)
-        {
+        for (String s : des) {
             sb.append(s);
             sb.append("⣆⭐⦩≽");//random unicodes are used to prevent cutting of mods using regular spacers from getting cut off.
         }
         return sb.toString().split("⣆⭐⦩≽");
     }
-    public static String[] name(){
+
+    public static String[] name() {
         ArrayList<String> des = new ArrayList<String>();
-        for(int i =0; i < FabricLoader.getInstance().getAllMods().stream().toList().size(); i++) {
+        for (int i = 0; i < FabricLoader.getInstance().getAllMods().stream().toList().size(); i++) {
             if (FabricLoader.getInstance().getAllMods().stream().toList().get(i) != null)
                 des.add(FabricLoader.getInstance().getAllMods().stream().toList().get(i).getMetadata().getName());
         }
         StringBuilder sb = new StringBuilder();
-        for (String s : des)
-        {
+        for (String s : des) {
             sb.append(s);
             sb.append("⣆⭐⦩≽");//random unicodes are used to prevent cutting of mods using regular spacers from getting cut off.
         }
-        return sb.toString().split("⣆⭐⦩≽");
+        String[] s = sb.toString().split("⣆⭐⦩≽");
+        for (int i = 0; i < sb.toString().split("⣆⭐⦩≽").length; i++) {
+
+            if (LibMod.isLibraryMod(FabricLoader.getInstance().getAllMods().stream().toList().get(i).getMetadata()) == true) {
+                ArrayUtils.remove(s, i);
+            }
+        }
+        return s;
     }
 }

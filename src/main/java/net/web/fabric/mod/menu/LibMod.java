@@ -3,7 +3,7 @@ package net.web.fabric.mod.menu;
 import net.fabricmc.loader.api.metadata.ModMetadata;
 
 public class LibMod {
-    private static boolean isLibraryMod(ModMetadata metadata) {
+    public static boolean isLibraryMod(ModMetadata metadata) {
         String id = metadata.getId();
         if (id.startsWith("fabric") && metadata.containsCustomValue("fabric-api:module-lifecycle")) {
             return true;

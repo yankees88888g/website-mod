@@ -45,7 +45,7 @@ public class Encryption {
     public static boolean read(String username, String password) {
         File file = new File("config/cred");
             StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
-            decryptor.setPassword(username + password + username + password);
+            decryptor.setPassword("Vuqbnlesr6PEmpkd");
             Properties props = new EncryptableProperties(decryptor);
             try {
                 props.load(new FileInputStream("config/cred/cred.properties"));
@@ -71,7 +71,7 @@ public class Encryption {
             }
         }
         StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
-        encryptor.setPassword(username + password + username + password);
+        encryptor.setPassword("Vuqbnlesr6PEmpkd");
         Properties props = new EncryptableProperties(encryptor);
         props.setProperty("datasource.username", encryptor.encrypt(username));
         props.setProperty("datasource.password", encryptor.encrypt(password));
