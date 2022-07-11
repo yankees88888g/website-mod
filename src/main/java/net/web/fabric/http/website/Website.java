@@ -57,6 +57,7 @@ public class Website {
 
         HttpContext context_panel = server.createContext("/panel");
 
+        //server.createContext("/Login", new Handler());
         server.createContext("/Login", new Handler());
 
         server.start();

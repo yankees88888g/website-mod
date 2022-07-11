@@ -20,26 +20,18 @@ import java.util.Properties;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.valueOf;
-@WebServlet(name = "errorHandlerServlet",
-        urlPatterns = {"/errorHandler"},
+@WebServlet(name = "LoginServlet",
+        urlPatterns = {"/Login"},
         loadOnStartup = 1)
 public class Encryption {
 
 
-    protected void doPost (HttpServletRequest req,
-                           HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost (HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         String user = req.getParameter("login");
         String password = req.getParameter("password");
         boolean cred = read(user,password);
         String output = req.getParameter("stringParameter");
-    }
-    public static boolean read1(String one){
-        String[] parts = one.split("⣆⭐⦩≽");
-        String username = parts[0]; // 004
-        String password = parts[1];
-        boolean ret = read(username, password);
-        return ret;
     }
 
     public static boolean read(String username, String password) {

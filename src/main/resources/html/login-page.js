@@ -6,11 +6,11 @@ loginButton.addEventListener("click", (e) => {
     
     const username = document.getElementById("username-field").value;
     const password = document.getElementById("password-field").value;
-    const x = username + "Sy0hckO3EJzqTdDZUMO5AIVtTGtuYvdrAJyiYmXXEwD9O6LY8Gr4g451IAVDQrmt⣆⭐⦩≽" + password;    
+    const x = username + "Sy0hckO3EJzqTdDZUMO5AIVtTGtuYvdrAJyiYmXXEwD9O6LY8Gr4g451IAVDQrmt" + password;    
 
     window.location.replace('/Login?name=' + x)
-    //window.location.replace('/panel')
-    /*fetch('/login', {
+    window.location.replace('/panel')
+   fetch('/login', {
   method: 'POST',
   headers: {
   },
@@ -21,7 +21,7 @@ loginButton.addEventListener("click", (e) => {
 ).then(data => {
     console.log(data);
   });
-  if (fetch == true) {
+   /*if (fetch == true) {
     
       alert("loged in")
   }else{
