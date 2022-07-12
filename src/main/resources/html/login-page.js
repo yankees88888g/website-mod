@@ -9,7 +9,8 @@ loginButton.addEventListener("click", (e) => {
     const x = username + "Sy0hckO3EJzqTdDZUMO5AIVtTGtuYvdrAJyiYmXXEwD9O6LY8Gr4g451IAVDQrmt" + password;    
 
     window.location.replace('/Login?name=' + x)
-    window.location.replace('/panel')
+
+
    fetch('/login', {
   method: 'POST',
   headers: {

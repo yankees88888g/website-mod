@@ -1,4 +1,4 @@
-package net.web.fabric.http.website;
+package net.web.fabric.http.website.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
@@ -11,7 +11,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.util.*;
 
-class HandlerWithServletSupport implements HttpHandler {
+public class HandlerWithServletSupport implements HttpHandler {
 
     private HttpServlet servlet;
 
@@ -198,9 +198,8 @@ class HandlerWithServletSupport implements HttpHandler {
     @Override
     public void handle(final HttpExchange ex) throws IOException {
         byte[] inBytes = getBytes(ex.getRequestBody());
-        ex.getRequestBody().close();
-        final ByteArrayInputStream newInput = new ByteArrayInputStream(
-                inBytes);
+
+        final ByteArrayInputStream newInput = new ByteArrayInputStream(inBytes);
         final ServletInputStream is = new ServletInputStream() {
 
             @Override
@@ -254,6 +253,12 @@ class HandlerWithServletSupport implements HttpHandler {
         } catch (ServletException e) {
             throw new RuntimeException(e);
         }
+        OutputStream os = ex.getResponseBody();
+        String response = "test";
+        ex.getRequestBody().close();
+        ex.sendResponseHeaders(200, response.length());
+        os.write(response.getBytes());
+        os.close();
     }
     protected String doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         HttpSession session = request.getSession(false);
