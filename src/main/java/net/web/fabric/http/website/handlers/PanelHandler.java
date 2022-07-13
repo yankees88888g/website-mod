@@ -38,14 +38,18 @@ public class PanelHandler implements HttpHandler {
         String password = parts[1];
         OutputStream os = exchange.getResponseBody();
 
-        boolean read = read(username, password);
-        if (read == false) {
-            String response = "Login failed try again or reset it";
+        if (read(username, password) == 1) {
+            String response = "<html>Logged in as " + username + "<br>Admin account" + "<li><a href=\"panel\">Panel</a></li></html>";
+            exchange.sendResponseHeaders(200, response.length());
+            os.write(response.getBytes());
+            os.close();
+        } else if (read(username, password) == 2) {
+            String response = "<html>Logged in as " + username + "<li><a href=\"panel\">Panel</a></li></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
         } else {
-            String response = "Logged in as " + username;
+            String response = "Login failed try again or reset it";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

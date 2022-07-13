@@ -5,8 +5,10 @@ import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.web.fabric.commands.CreateAccount;
+import net.web.fabric.commands.CreateAccountAdmin;
 import net.web.fabric.config.File;
 import net.web.fabric.http.website.Website;
+import net.web.fabric.http.website.login.cred.Encryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,9 +28,13 @@ public class WebMain implements ModInitializer {
 		LOGGER.info(valueOf(List.count()));
 		LOGGER.info(valueOf(List.name().length));
 		LOGGER.info(valueOf(FabricLoader.getInstance().getAllMods()));*/
+        Encryption.write("test","test", true, "test");
         File.main();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CreateAccount.register(dispatcher);
+        });
+        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
+            CreateAccountAdmin.register(dispatcher);
         });
     }
 

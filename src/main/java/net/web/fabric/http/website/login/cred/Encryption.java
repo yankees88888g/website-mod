@@ -5,12 +5,7 @@ import org.jasypt.properties.EncryptableProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -20,15 +15,12 @@ import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Properties;
 
-import static java.lang.Integer.parseInt;
-import static java.lang.Integer.valueOf;
-
 @WebServlet(name = "LoginServlet",
         urlPatterns = {"/Login"},
         loadOnStartup = 1)
 public class Encryption {
 
-    public static boolean read(String username, String password) {
+    public static int read(String username, String password) {
         File file = new File("config/cred");
         StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
         decryptor.setPassword("Vuqbnlesr6PEmpkd");
@@ -36,7 +28,7 @@ public class Encryption {
         for (int i = 0; ; ) {
             Path path = Path.of("config/cred/cred" + i + ".properties");
             if (Files.exists(path) == false) {
-                return false;
+                return 0;
             } else {
                 try {
                     props.load(new FileInputStream("config/cred/cred" + i + ".properties"));
@@ -46,7 +38,11 @@ public class Encryption {
                 final Logger LOGGER = LoggerFactory.getLogger("website-mod");
                 LOGGER.info("worked");
                 if (Objects.equals(decryptor.decrypt(props.getProperty("datasource.username")), username) && Objects.equals(decryptor.decrypt(props.getProperty("datasource.password")), password)) {
-                    return true;
+                    if (props.getProperty("admin") == "true") {
+                        return 1;
+                    } else {
+                        return 2;
+                    }
                 } else {
                     i++;
                 }
@@ -55,7 +51,7 @@ public class Encryption {
 
     }
 
-    public static void write(String username, String password) {
+    public static void write(String username, String password, boolean admin, String uuid) {
         File file = new File("config/cred");
         file.mkdir();
         if (!file.isFile()) {
@@ -70,18 +66,38 @@ public class Encryption {
         Properties props = new EncryptableProperties(encryptor);
         props.setProperty("datasource.username", encryptor.encrypt(username));
         props.setProperty("datasource.password", encryptor.encrypt(password));
+        props.setProperty("uuid", uuid);
+        props.setProperty("admin", String.valueOf(admin));
         for (int i = 0; ; ) {
+            //checks if player already has an account
             Path path = Path.of("config/cred/cred" + i + ".properties");
-            if (Files.exists(path) == false) {
+            if (Files.exists(path) == true) {
                 try {
-                    props.store(new FileOutputStream("config/cred/cred" + i + ".properties"), null);
+                    props.load(new FileInputStream("config/cred/cred" + i + ".properties"));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                return;
+                if (Objects.equals(props.getProperty("uuid"), uuid)) {
+                    return;
+                }
+            } else if (Files.exists(path) == true) {
+                for (int j = 0; ; ) {
+                    Path path2 = Path.of("config/cred/cred" + j + ".properties");
+                    if (Files.exists(path2) == false) {
+                        try {
+                            props.store(new FileOutputStream("config/cred/cred" + j + ".properties"), null);
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        return;
+                    } else {
+                        j++;
+                    }
+                }
             } else {
                 i++;
             }
         }
+
     }
 }
