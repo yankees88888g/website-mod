@@ -3,7 +3,6 @@ package net.web.fabric.http.website;
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
 import net.web.fabric.http.website.handlers.*;
-import org.apache.http.client.methods.HttpPatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +57,7 @@ public class Website {
         HttpContext context_Ainv = server.createContext("/admin/inv");
         context_Ainv.setHandler(InvHandler::handleAInv);
 
-        server.createContext("/Login", new Handler());
+        server.createContext("/Login", new LoginHandler());
         server.createContext("/panel", new PanelHandler());
         server.createContext("/admin", new AdminHandler());
 

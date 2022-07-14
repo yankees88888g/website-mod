@@ -2,7 +2,7 @@ package net.web.fabric.http.website.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
 import net.minecraft.item.ItemStack;
-import net.minecraft.screen.slot.Slot;
+import net.web.fabric.http.website.login.cred.Credentials;
 import net.web.fabric.inv.view.Gui;
 import net.web.fabric.inv.view.View;
 
@@ -16,14 +16,14 @@ public class InvHandler {
 
     public static void handleInv(HttpExchange exchange) throws IOException {
         OutputStream os = exchange.getResponseBody();
-        String username = Arrays.getID(exchange.getRemoteAddress().getAddress());
+        Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
+        String username = cred.username;
         String response;
         if (username == null || username.equals("null")) {
             response = redirect;
-        } else {
-            String s = Arrays.getPlayer(exchange.getRemoteAddress().getAddress());
-            View.inv(s,Arrays.getUUID(exchange.getRemoteAddress().getAddress()));
-            Gui gui = Gui.getInv(s);
+        } else {//TODO fix error in side this else statement
+            View.inv(String.valueOf(cred.playername),cred.uuid);
+            Gui gui = Gui.getInv(String.valueOf(cred.playername));
             StringBuilder html = new StringBuilder();
             for (ItemStack slot : gui.slots) {
                 String a = String.valueOf(slot.getItem());
@@ -54,10 +54,11 @@ public class InvHandler {
 
     public static void handleAInvResponse(HttpExchange exchange, String requestParamValue) throws IOException {
         OutputStream os = exchange.getResponseBody();
-        int admin = Arrays.getAdmin(exchange.getRemoteAddress().getAddress());
+        Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
+        boolean admin = cred.admin;
         String response;
-        if (admin == 0) {
-            response = "Inventory of " + Arrays.getID(exchange.getRemoteAddress().getAddress());
+        if (admin == true) {
+            response = "Inventory of " + cred.username;
         } else {
             response = redirect;
         }

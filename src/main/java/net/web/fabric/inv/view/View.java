@@ -13,9 +13,6 @@ import net.web.fabric.WebMain;
 
 import java.util.UUID;
 
-import static net.web.fabric.inv.view.Gui.*;
-
-//new GameProfile(UUID.fromString(uuid), player) for gameprofile
 public class View {
     private static MinecraftServer minecraftServer = WebMain.getMinecraftServer();
 
