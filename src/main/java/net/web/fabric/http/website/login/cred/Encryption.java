@@ -122,4 +122,24 @@ public class Encryption {
             }
         }
     }
+
+    public static String getUUID(String username, String password) {
+        StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
+        decryptor.setPassword("Vuqbnlesr6PEmpkd");
+        Properties props = new EncryptableProperties(decryptor);
+        for (int i = 0; ; ) {
+            Path path = Path.of("config/cred/cred" + i + ".properties");
+            if (Files.exists(path) == false) {
+                return null;
+            }
+            try {
+                props.load(new FileInputStream("config/cred/cred" + i + ".properties"));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            if (Objects.equals(decryptor.decrypt(props.getProperty("datasource.username")), username) && Objects.equals(decryptor.decrypt(props.getProperty("datasource.password")), password)) {
+                return props.getProperty("uuid");
+            }
+        }
+    }
 }

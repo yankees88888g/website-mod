@@ -13,6 +13,7 @@ public class Arrays {
     public static List<Integer> admins = new ArrayList<>();
     public static List<String> usernames = new ArrayList<>();
     public static List<Text> playerNames = new ArrayList<>();
+    public static List<String> uuids = new ArrayList<>();
 
     //must have  if (addresses.get(i).equals(adr)) {}
     public static String getID(InetAddress adr) {
@@ -46,7 +47,7 @@ public class Arrays {
         return 2;
     }
 
-    public static void login(InetAddress adr, String username, boolean admin, Text playerName) {
+    public static void login(InetAddress adr, String username, boolean admin, Text playerName, String uuid) {
         addresses.add(adr);
         usernames.add(username);
         if (admin == true) {
@@ -55,6 +56,7 @@ public class Arrays {
             admins.add(1);
         }
         playerNames.add(playerName);
+        uuids.add(uuid);
     }
 
     public static boolean isLoggedIn(InetAddress adr) {
@@ -64,5 +66,22 @@ public class Arrays {
             }
         }
         return false;
+    }
+
+    public static String getPlayer(InetAddress adr) {
+        for (int i = 0; i <= addresses.size(); i++) {
+            if (addresses.get(i).equals(adr)) {
+                return String.valueOf(playerNames.get(i));
+            }
+        }
+        return null;
+    }
+    public static String getUUID(InetAddress adr) {
+        for (int i = 0; i <= addresses.size(); i++) {
+            if (addresses.get(i).equals(adr)) {
+                return uuids.get(i);
+            }
+        }
+        return null;
     }
 }

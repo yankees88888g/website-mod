@@ -2,10 +2,8 @@ package net.web.fabric.http.website;
 
 import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpServer;
-import net.web.fabric.http.website.handlers.AdminHandler;
-import net.web.fabric.http.website.handlers.Handler;
-import net.web.fabric.http.website.handlers.LibHandlers;
-import net.web.fabric.http.website.handlers.PanelHandler;
+import net.web.fabric.http.website.handlers.*;
+import org.apache.http.client.methods.HttpPatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +51,12 @@ public class Website {
 
         HttpContext context_modCount = server.createContext("/mod_count");
         context_modCount.setHandler(LibHandlers::handleModCount);
+
+        HttpContext context_inv = server.createContext("/panel/inv");
+        context_inv.setHandler(InvHandler::handleInv);
+
+        HttpContext context_Ainv = server.createContext("/admin/inv");
+        context_Ainv.setHandler(InvHandler::handleAInv);
 
         server.createContext("/Login", new Handler());
         server.createContext("/panel", new PanelHandler());

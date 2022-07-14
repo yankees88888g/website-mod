@@ -7,8 +7,7 @@ import net.minecraft.text.Text;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import static net.web.fabric.http.website.login.cred.Encryption.getPlayerName;
-import static net.web.fabric.http.website.login.cred.Encryption.read;
+import static net.web.fabric.http.website.login.cred.Encryption.*;
 
 public class Handler implements HttpHandler {
 
@@ -43,14 +42,14 @@ public class Handler implements HttpHandler {
             String response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /panel\" /></head><body><p>Logged in as " + username + "<br>Admin account" + "redirecting to panel</p></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
-            Arrays.login(exchange.getRemoteAddress().getAddress(), username, true, playerName);
+            Arrays.login(exchange.getRemoteAddress().getAddress(), username, true, playerName, getUUID(username,password));
             os.close();
         } else if (read(username, password) == 2) {//non admin
             Text playerName = getPlayerName(username, password);
             String response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /panel\" /></head><body><p>Logged in as " + username + " redirecting to panel</p></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
-            Arrays.login(exchange.getRemoteAddress().getAddress(), username, false, playerName);
+            Arrays.login(exchange.getRemoteAddress().getAddress(), username, false, playerName, getUUID(username, password));
             os.close();
         } else {
             String response = "Login failed try again or reset it";

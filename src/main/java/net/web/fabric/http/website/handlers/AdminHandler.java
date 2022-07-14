@@ -15,7 +15,7 @@ public class AdminHandler implements HttpHandler {
         if (admin == 0) {
             response = "Entered admin panel as " + Arrays.getID(exchange.getRemoteAddress().getAddress());
         } else {
-            response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"1777.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
+            response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
         }
         exchange.sendResponseHeaders(200, response.length());
         os.write(response.getBytes());
