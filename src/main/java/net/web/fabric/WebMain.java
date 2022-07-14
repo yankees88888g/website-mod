@@ -28,12 +28,9 @@ public class WebMain implements ModInitializer {
 		LOGGER.info(valueOf(List.count()));
 		LOGGER.info(valueOf(List.name().length));
 		LOGGER.info(valueOf(FabricLoader.getInstance().getAllMods()));*/
-        Encryption.write("test","test", true, "test");
         File.main();
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CreateAccount.register(dispatcher);
-        });
-        CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CreateAccountAdmin.register(dispatcher);
         });
     }

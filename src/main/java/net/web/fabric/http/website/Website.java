@@ -1,23 +1,18 @@
 package net.web.fabric.http.website;
 
 import com.sun.net.httpserver.HttpContext;
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
+import net.web.fabric.http.website.handlers.AdminHandler;
 import net.web.fabric.http.website.handlers.Handler;
-import net.web.fabric.http.website.handlers.HandlerWithServletSupport;
 import net.web.fabric.http.website.handlers.LibHandlers;
-import net.web.fabric.write.ModCount;
+import net.web.fabric.http.website.handlers.PanelHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.http.*;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
-
-import static net.web.fabric.http.website.InputStreamClass.*;
 
 @SuppressWarnings("deprecation")
 public class Website {
@@ -59,10 +54,10 @@ public class Website {
         HttpContext context_modCount = server.createContext("/mod_count");
         context_modCount.setHandler(LibHandlers::handleModCount);
 
-        HttpContext context_panel = server.createContext("/panel");
-
         server.createContext("/Login", new Handler());
-        //server.createContext("/panel", new HandlerWithServletSupport(null));
+        server.createContext("/panel", new PanelHandler());
+        server.createContext("/admin", new AdminHandler());
+
         server.setExecutor(null);
         server.start();
         LOGGER.info("Server started on port " + port + "!");

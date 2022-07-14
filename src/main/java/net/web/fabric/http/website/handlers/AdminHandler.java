@@ -6,21 +6,19 @@ import com.sun.net.httpserver.HttpHandler;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class PanelHandler implements HttpHandler {
-
+public class AdminHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         OutputStream os = exchange.getResponseBody();
-        String username = Arrays.getID(exchange.getRemoteAddress().getAddress());
+        int admin = Arrays.getAdmin(exchange.getRemoteAddress().getAddress());
         String response;
-        if (username == null || username.equals("null")) {
-            response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
+        if (admin == 0) {
+            response = "Entered admin panel as " + Arrays.getID(exchange.getRemoteAddress().getAddress());
         } else {
-            response = "Entered panel as " + username;
+            response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"1777.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
         }
         exchange.sendResponseHeaders(200, response.length());
         os.write(response.getBytes());
         os.close();
     }
 }
-

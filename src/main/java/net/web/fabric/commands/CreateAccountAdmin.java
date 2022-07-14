@@ -27,7 +27,7 @@ public class CreateAccountAdmin {
 
     public static int onCreateAccount(CommandContext<ServerCommandSource> context) {
         System.out.println("Player: " + context.getSource().getName());
-        Encryption.write(context.getArgument("username", String.class), context.getArgument("password", String.class), true, context.getSource().getPlayer().getUuidAsString());
+        Encryption.write(context.getArgument("username", String.class), context.getArgument("password", String.class), true, context.getSource().getPlayer().getUuidAsString(), context.getSource().getPlayer().getName());
         context.getSource().sendFeedback(Text.of("created account for " + context.getArgument("username", String.class)), true);
         return 1;
     }
