@@ -17,9 +17,8 @@ public class InvHandler {
     public static void handleInv(HttpExchange exchange) throws IOException {
         OutputStream os = exchange.getResponseBody();
         Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
-        String username = cred.username;
         String response;
-        if (username == null || username.equals("null")) {
+        if (!exchange.getRemoteAddress().getAddress().equals(cred.address)) {
             response = redirect;
         } else {//TODO fix error in side this else statement
             View.inv(String.valueOf(cred.playername),cred.uuid);

@@ -14,7 +14,7 @@ public class AdminHandler implements HttpHandler {
         Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
         boolean admin = cred.admin;
         String response;
-        if (admin == true) {
+        if (admin && exchange.getRemoteAddress().getAddress().equals(cred.address)) {
             response = "Entered admin panel as " + cred.username;
         } else {
             response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /\" /></head><body><p>error redirecting</p></body></html>";

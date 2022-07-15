@@ -1,8 +1,10 @@
 package net.web.fabric.http.website.handlers;
 
+import com.sun.net.httpserver.HttpContext;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import net.minecraft.text.Text;
+import net.web.fabric.http.website.Website;
 import net.web.fabric.http.website.login.cred.Credentials;
 
 import java.io.IOException;
