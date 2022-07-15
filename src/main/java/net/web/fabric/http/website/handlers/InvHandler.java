@@ -9,6 +9,8 @@ import net.web.fabric.inv.view.View;
 import java.io.IOException;
 import java.io.OutputStream;
 
+import static net.web.fabric.WebMain.LOGGER;
+
 public class InvHandler {
     public static String redirect = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
 
@@ -28,6 +30,7 @@ public class InvHandler {
                 String a = String.valueOf(slot.getItem());
                 int b = slot.getCount();
                 html.append(a + " " + b);
+                LOGGER.info(String.valueOf(html));
             }
             response = "<html><body>Inventory and ender chest<br>" + html + "</body></html>";
         }

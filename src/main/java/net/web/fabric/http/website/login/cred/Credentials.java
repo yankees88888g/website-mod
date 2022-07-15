@@ -31,11 +31,28 @@ public class Credentials {
         cred.remove(String.valueOf(adr));
     }
 
-    public static boolean getAdmin(InetAddress adr) {
-        return cred.get(String.valueOf(adr)).admin;
-    }
 
     public static Credentials getCred(InetAddress adr){
         return cred.get(String.valueOf(adr));
+    }
+    public static int verify(InetAddress adr){
+        if(cred.get(String.valueOf(adr)) == null){
+            return 0;
+        }
+        if(cred.get(String.valueOf(adr)).address.equals(adr)){
+            return 1;
+        }
+        return 0;
+    }
+    public static int verifyAdmin(InetAddress adr){
+        if(cred.get(String.valueOf(adr)) == null){
+            return 0;
+        }
+        if(cred.get(String.valueOf(adr)).address.equals(adr)){
+            if(cred.get(String.valueOf(adr)).admin){
+                return 1;
+            }
+        }
+        return 0;
     }
 }
