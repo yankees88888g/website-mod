@@ -2,13 +2,12 @@ package net.web.fabric;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.web.fabric.commands.CreateAccount;
 import net.web.fabric.commands.CreateAccountAdmin;
 import net.web.fabric.config.File;
-import net.web.fabric.http.website.Website;
-import net.web.fabric.http.website.login.cred.Encryption;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,6 +32,7 @@ public class WebMain implements ModInitializer {
             CreateAccount.register(dispatcher);
             CreateAccountAdmin.register(dispatcher);
         });
+        ServerLifecycleEvents.SERVER_STARTING.register(this::onLogicalServerStarting);
     }
 
 

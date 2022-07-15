@@ -20,7 +20,7 @@ public class AdminHandler implements HttpHandler {
             os.write(response.getBytes());
             os.close();
         } else {
-            String response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
+            String response = InvHandler.redirect;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
