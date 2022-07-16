@@ -108,11 +108,4 @@ public class LibHandlers {
         os.write(html("html/panel/panel.css", false,null, false, true));
         os.close();
     }
-
-    public static void handleInvCSS(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200,html("html/inv/inv.css", false,null, false, true).length);
-        OutputStream os = exchange.getResponseBody();
-        os.write(html("html/inv/inv.css", false,null, false, true));
-        os.close();
-    }
 }

@@ -43,8 +43,6 @@ public class Website {
         server.createContext("/admin.css").setHandler(LibHandlers::handleAdminCSS);
         server.createContext("/panel.js").setHandler(LibHandlers::handlePanelScript);
         server.createContext("/panel.css").setHandler(LibHandlers::handlePanelCSS);
-        server.createContext("/panel/inv.css").setHandler(LibHandlers::handleInvCSS);
-        server.createContext("/admin/inv.css").setHandler(LibHandlers::handleInvCSS);
         server.createContext("/admin/admin.js").setHandler(LibHandlers::handleAdminScript);
 
         server.createContext("/panel/inv").setHandler(InvHandler::handleInv);
