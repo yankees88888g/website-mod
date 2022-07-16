@@ -1,7 +1,6 @@
 package net.web.fabric.http.website.handlers;
 
 import com.sun.net.httpserver.HttpExchange;
-import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.item.ItemStack;
 import net.web.fabric.http.website.login.cred.Credentials;
 import net.web.fabric.inv.view.Gui;
@@ -11,13 +10,9 @@ import net.web.fabric.inv.view.View;
 import java.io.IOException;
 import java.io.OutputStream;
 
-import static net.web.fabric.WebMain.LOGGER;
-
 public class InvHandler {
-    public static String redirect = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /\" /></head><body><p>error redirecting</p></body></html>";
 
     //nonadmin
-
     public static void handleInv(HttpExchange exchange) throws IOException {
         OutputStream os = exchange.getResponseBody();
         Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
@@ -44,7 +39,7 @@ public class InvHandler {
             os.write(response.getBytes());
             os.close();
         } else {
-            response = redirect;
+            response = HtmlHelper.redirect;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
@@ -91,7 +86,7 @@ public class InvHandler {
             os.write(response.getBytes());
             os.close();
         } else {
-            response = redirect;
+            response = HtmlHelper.redirect;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

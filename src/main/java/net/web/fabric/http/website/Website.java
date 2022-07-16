@@ -22,40 +22,30 @@ public class Website {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
         HttpContext context = server.createContext("/");
         server.setExecutor(threadPoolExecutor);
+
         if (homepage == false) {
             context.setHandler(LibHandlers::handleRequest);
-            HttpContext context_main_script = server.createContext("/main.js");
-            context_main_script.setHandler(LibHandlers::handleMainScript);
-            HttpContext context_main_css = server.createContext("/main.css");
-            context_main_css.setHandler(LibHandlers::handleMainCSS);
+            server.createContext("/index.js").setHandler(LibHandlers::handleIndexScript);
+            server.createContext("/index.css").setHandler(LibHandlers::handleIndexCSS);
         } else {
             context.setHandler(LibHandlers::handleCustom);
         }
 
-        HttpContext context_about = server.createContext("/about_us");
-        context_about.setHandler(LibHandlers::handleAbout);
-
-        HttpContext context_map = server.createContext("/map");
-        context_map.setHandler(LibHandlers::handleMap);
+        server.createContext("/about_us").setHandler(LibHandlers::handleAbout);
+        server.createContext("/map").setHandler(LibHandlers::handleMap);
         //to be able to configurable with dynmap and other map mods to redirect to here.
 
-        HttpContext context_login = server.createContext("/login");
-        context_login.setHandler(LibHandlers::handleLogin);
+        server.createContext("/login").setHandler(LibHandlers::handleLogin);
+        server.createContext("/login-page.js").setHandler(LibHandlers::handleLoginScript);
+        server.createContext("/login-page.css").setHandler(LibHandlers::handleLoginCSS);
+        server.createContext("/mod_count").setHandler(LibHandlers::handleModCount);
+        server.createContext("/admin.js").setHandler(LibHandlers::handleAdminScript);
+        server.createContext("/admin.css").setHandler(LibHandlers::handleAdminCSS);
+        server.createContext("/panel.js").setHandler(LibHandlers::handlePanelScript);
+        server.createContext("/panel.css").setHandler(LibHandlers::handlePanelCSS);
 
-        HttpContext context_login_script = server.createContext("/login-page.js");
-        context_login_script.setHandler(LibHandlers::handleLoginScript);
-
-        HttpContext context_login_css = server.createContext("/login-page.css");
-        context_login_css.setHandler(LibHandlers::handleLoginCSS);
-
-        HttpContext context_modCount = server.createContext("/mod_count");
-        context_modCount.setHandler(LibHandlers::handleModCount);
-
-        HttpContext context_inv = server.createContext("/panel/inv");
-        context_inv.setHandler(InvHandler::handleInv);
-
-        HttpContext context_Ainv = server.createContext("/admin/inv");
-        context_Ainv.setHandler(InvHandler::handleAInv);
+        server.createContext("/panel/inv").setHandler(InvHandler::handleInv);
+        server.createContext("/admin/inv").setHandler(InvHandler::handleAInv);
 
         server.createContext("/Login", new LoginHandler());
         server.createContext("/panel", new PanelHandler());

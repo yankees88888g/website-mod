@@ -10,23 +10,23 @@ import static net.web.fabric.http.website.InputStreamClass.html;
 
 public class LibHandlers {
     public static void handleRequest(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200, html("html/main.html", false, null, false, true).length);
+        exchange.sendResponseHeaders(200, html("html/index/index.html", false, null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/main.html", false, null, false, true));
+        os.write(html("html/index/index.html", false, null, false, true));
         os.close();
     }
 
-    public static void handleMainCSS(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200, html("html/main.css", false, null, false, true).length);
+    public static void handleIndexCSS(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200, html("html/index/index.css", false, null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/main.css", false, null, false, true));
+        os.write(html("html/index/index.css", false, null, false, true));
         os.close();
     }
 
-    public static void handleMainScript(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200, html("html/main.js", false, null, false, true).length);
+    public static void handleIndexScript(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200, html("html/index/index.js", false, null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/main.js", false, null, false, true));
+        os.write(html("html/index/index.js", false, null, false, true));
         os.close();
 
     }
@@ -53,24 +53,24 @@ public class LibHandlers {
     }
 
     public static void handleLogin(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200, html("html/login-page.html", false, null, false, true).length);
+        exchange.sendResponseHeaders(200, html("html/login/login-page.html", false, null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/login-page.html", false, null, false, true));
+        os.write(html("html/login/login-page.html", false, null, false, true));
         //os.write(user);
         os.close();
     }
 
     public static void handleLoginScript(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200, html("html/login-page.js", false, null, false, true).length);
+        exchange.sendResponseHeaders(200, html("html/login/login-page.js", false, null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/login-page.js", false, null, false, true));
+        os.write(html("html/login/login-page.js", false, null, false, true));
         os.close();
     }
 
     public static void handleLoginCSS(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200, html("html/login-page.css", false, null, false, true).length);
+        exchange.sendResponseHeaders(200, html("html/login/login-page.css", false, null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/login-page.css", false, null, false, true));
+        os.write(html("html/login/login-page.css", false, null, false, true));
         os.close();
     }
 
@@ -78,6 +78,34 @@ public class LibHandlers {
         exchange.sendResponseHeaders(200, html("config/html/mod_count.html", true, ModCount.Count, true, false).length);
         OutputStream os = exchange.getResponseBody();
         os.write(html("config/html/mod_count.html", true, ModCount.Count, true, false));
+        os.close();
+    }
+
+    public static void handleAdminScript(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200,html("html/panels/admin.js", false,null, false, true).length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(html("html/panels/admin.js", false,null, false, true));
+        os.close();
+    }
+
+    public static void handleAdminCSS(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200,html("html/panels/admin.css", false,null, false, true).length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(html("html/panels/admin.css", false,null, false, true));
+        os.close();
+    }
+
+    public static void handlePanelScript(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200,html("html/panels/panel.js", false,null, false, true).length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(html("html/panels/panel.js", false,null, false, true));
+        os.close();
+    }
+
+    public static void handlePanelCSS(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200,html("html/panels/panel.css", false,null, false, true).length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(html("html/panels/panel.css", false,null, false, true));
         os.close();
     }
 }

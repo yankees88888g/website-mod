@@ -1,16 +1,11 @@
 package net.web.fabric.inv.view;
 
 import com.mojang.authlib.GameProfile;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.serialization.Dynamic;
-import dev.jaqobb.namemcapi.NameMCAPI;
-import dev.jaqobb.namemcapi.profile.ProfileRepository;
-import net.minecraft.command.argument.GameProfileArgumentType;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.dimension.DimensionType;
@@ -71,7 +66,7 @@ public class View {
     }
 
     public static String getUUID(String player) {
-        return minecraftServer.getPlayerManager().getPlayer(player).getUuidAsString();
+        return minecraftServer.getUserCache().findByName(player).get().getId().toString();
     }
 
     private static boolean isProtected(ServerPlayerEntity playerEntity) {

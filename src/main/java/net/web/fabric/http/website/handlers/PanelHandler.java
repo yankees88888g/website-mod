@@ -18,12 +18,12 @@ public class PanelHandler implements HttpHandler {
         OutputStream os = exchange.getResponseBody();
         if (verify(exchange.getRemoteAddress().getAddress()) == 1) {
             String username = cred.username;
-            String response = "Entered panel as " + username;
+            String response = HtmlHelper.title1 + "Panel: " + username + HtmlHelper.title2CSS + "panels/panel.css\">" + HtmlHelper.CSS2Body + "<h3>Entered panel as " + username + "</h3><br><br><li><a href=\"/panel/inv\" class=\"button\">View Your Inventory.</a></li>" + HtmlHelper.end;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
         } else {
-            String response = InvHandler.redirect;
+            String response = HtmlHelper.redirect;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
