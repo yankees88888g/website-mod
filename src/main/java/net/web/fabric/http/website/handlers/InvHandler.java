@@ -9,6 +9,7 @@ import net.web.fabric.inv.view.View;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 public class InvHandler {
 
@@ -20,21 +21,7 @@ public class InvHandler {
         if (Credentials.verify(exchange.getRemoteAddress().getAddress()) == 1) {
             View.inv(String.valueOf(cred.playername), cred.uuid);
             View.eChest(String.valueOf(cred.playername), cred.uuid);
-            Gui gui = Gui.getInv(String.valueOf(cred.playername));
-            GuiEC guiEC = GuiEC.getInv(String.valueOf(cred.playername));
-            StringBuilder html = new StringBuilder();
-            for (ItemStack slot : gui.slots) {
-                String a = String.valueOf(slot.getItem());
-                int b = slot.getCount();
-                html.append("<img src=\""+ a +".png\"" + a + ">:" + b + " ");
-            }
-            StringBuilder ec = new StringBuilder();
-            for (ItemStack slot : guiEC.slots) {
-                String a = String.valueOf(slot.getItem());
-                int b = slot.getCount();
-                ec.append(a + ":" + b + " ");
-            }
-            response = "<html><body>Inventory<br>" + html + "<br>Ender chest<br>" + ec + "</body></html>";
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"inv.css\"><body>Inventory<br>" + htmlBuilder(Gui.getInv(String.valueOf(cred.playername))) + "<br>Ender Chest<br>" + htmlBuilderEC(GuiEC.getInv(String.valueOf(cred.playername))) + "</body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
@@ -63,25 +50,13 @@ public class InvHandler {
 
     public static void handleAInvResponse(HttpExchange exchange, String player) throws IOException {
         OutputStream os = exchange.getResponseBody();
+        Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
         String response;
         if (Credentials.verifyAdmin(exchange.getRemoteAddress().getAddress()) == 1) {
             View.inv(String.valueOf(player), View.getUUID(player));
             View.eChest(String.valueOf(player), View.getUUID(player));
             Gui gui = Gui.getInv(String.valueOf(player));
-            GuiEC guiEC = GuiEC.getInv(String.valueOf(player));
-            StringBuilder html = new StringBuilder();
-            for (ItemStack slot : gui.slots) {
-                String a = String.valueOf(slot.getItem());
-                int b = slot.getCount();
-                html.append(a + ":" + b + " ");
-            }
-            StringBuilder ec = new StringBuilder();
-            for (ItemStack slot : guiEC.slots) {
-                String a = String.valueOf(slot.getItem());
-                int b = slot.getCount();
-                ec.append(a + ":" + b + " ");
-            }
-            response = "<html><body>Inventory of " + player + "<br>" + html + "<br>Ender chest<br>" + ec + "</body></html>";
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + player + "</title></head><link rel=\"stylesheet\" href=\"inv.css\"><body>Inventory of " + player + "<br>" + htmlBuilder(Gui.getInv(player)) + "<br>Ender Chest of " + player + "<br>" + htmlBuilderEC(GuiEC.getInv(player)) + "<br><input type=\"text\" name=\"player\" id=\"player\" class=\"player-field\" placeholder=\"Player Name\"><button type=\"submit\" id=\"submit\">Enter</button><script src=\"admin.js\"></script></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
@@ -91,5 +66,36 @@ public class InvHandler {
             os.write(response.getBytes());
             os.close();
         }
+    }
+
+    public static String htmlBuilderEC(GuiEC guiEC) {
+        List<ItemStack> slots = guiEC.slots;
+        StringBuilder html = new StringBuilder();
+        for (int j = 0, slotsSize = slots.size(); j < slotsSize; j++) {
+            ItemStack slot = slots.get(j);
+            if (j % 9 == 0) {
+                html.append("<br>");
+            }
+            html.append(getHtmlFromItemStack(slot));
+        }
+        return html.toString();
+    }
+    public static String htmlBuilder(Gui gui) {
+        List<ItemStack> slots = gui.slots;
+        StringBuilder html = new StringBuilder();
+        for (int j = 0, slotsSize = slots.size(); j < slotsSize; j++) {
+            ItemStack slot = slots.get(j);
+            if (j % 9 == 0) {
+                html.append("<br>");
+            }
+            html.append(getHtmlFromItemStack(slot));
+        }
+        return html.toString();
+    }
+    private static String getHtmlFromItemStack(ItemStack itemStack) {
+        String a = String.valueOf(itemStack.getItem());
+        String c = a.replace("_", "-");
+        int b = itemStack.getCount();
+        return "<i class=\"icon-minecraft icon-minecraft-" + c + "\"></i>" + ":" + b + " ";
     }
 }

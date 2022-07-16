@@ -82,30 +82,37 @@ public class LibHandlers {
     }
 
     public static void handleAdminScript(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200,html("html/panels/admin.js", false,null, false, true).length);
+        exchange.sendResponseHeaders(200,html("html/panel/admin.js", false,null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/panels/admin.js", false,null, false, true));
+        os.write(html("html/panel/admin.js", false,null, false, true));
         os.close();
     }
 
     public static void handleAdminCSS(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200,html("html/panels/admin.css", false,null, false, true).length);
+        exchange.sendResponseHeaders(200,html("html/panel/admin.css", false,null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/panels/admin.css", false,null, false, true));
+        os.write(html("html/panel/admin.css", false,null, false, true));
         os.close();
     }
 
     public static void handlePanelScript(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200,html("html/panels/panel.js", false,null, false, true).length);
+        exchange.sendResponseHeaders(200,html("html/panel/panel.js", false,null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/panels/panel.js", false,null, false, true));
+        os.write(html("html/panel/panel.js", false,null, false, true));
         os.close();
     }
 
     public static void handlePanelCSS(HttpExchange exchange) throws IOException {
-        exchange.sendResponseHeaders(200,html("html/panels/panel.css", false,null, false, true).length);
+        exchange.sendResponseHeaders(200,html("html/panel/panel.css", false,null, false, true).length);
         OutputStream os = exchange.getResponseBody();
-        os.write(html("html/panels/panel.css", false,null, false, true));
+        os.write(html("html/panel/panel.css", false,null, false, true));
+        os.close();
+    }
+
+    public static void handleInvCSS(HttpExchange exchange) throws IOException {
+        exchange.sendResponseHeaders(200,html("html/inv/inv.css", false,null, false, true).length);
+        OutputStream os = exchange.getResponseBody();
+        os.write(html("html/inv/inv.css", false,null, false, true));
         os.close();
     }
 }

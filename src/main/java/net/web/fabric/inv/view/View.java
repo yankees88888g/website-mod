@@ -10,15 +10,24 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.dimension.DimensionType;
 import net.web.fabric.WebMain;
+import org.apache.commons.logging.Log;
 
+import java.util.Objects;
 import java.util.UUID;
+
+import static net.web.fabric.http.website.Website.LOGGER;
 
 public class View {
     private static MinecraftServer minecraftServer = WebMain.getMinecraftServer();
 
 
     private static ServerPlayerEntity getRequestedPlayer(String player, String uuid) {
-        ServerPlayerEntity requestedPlayer = minecraftServer.getPlayerManager().getPlayer(player);
+        ServerPlayerEntity requestedPlayer = null;
+        for (int i = 0; i < minecraftServer.getPlayerManager().getPlayerList().size(); i++) {
+            if (Objects.equals(minecraftServer.getPlayerManager().getPlayerList().get(i).getUuidAsString(), uuid)) {
+                requestedPlayer = minecraftServer.getPlayerManager().getPlayerList().get(i);
+            }
+        }
         if (requestedPlayer == null) {
             requestedPlayer = minecraftServer.getPlayerManager().createPlayer(new GameProfile(UUID.fromString(uuid), player), null);
             NbtCompound compound = minecraftServer.getPlayerManager().loadPlayerData(requestedPlayer);

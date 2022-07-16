@@ -15,7 +15,7 @@ public class AdminHandler implements HttpHandler {
         Credentials cred = getCred(exchange.getRemoteAddress().getAddress());
         OutputStream os = exchange.getResponseBody();
         if (Credentials.verifyAdmin(exchange.getRemoteAddress().getAddress()) == 1) {
-            String response = HtmlHelper.title1 + "Admin Panel" + HtmlHelper.title2CSS + "panels/admin.css\">" + HtmlHelper.CSS2Body + "<h2>Entered admin panel as " + cred.username + "</h2><br><form action=\"/admin/inv\"><input type=\"text\" name=\"player\" id=\"player-field\" class=\"player-field\" placeholder=\"Player Name\"><button type=\"submit\" id=\"submit\">Enter</button><script src=\"html/panels/admin.js\"></script></form>" + HtmlHelper.end;
+            String response = HtmlHelper.title1 + "Admin Panel" + HtmlHelper.title2CSS + "admin.css\">" + HtmlHelper.CSS2Body + "<h2>Entered admin panel as " + cred.username + "</h2><br><input type=\"text\" name=\"player\" id=\"player\" class=\"player-field\" placeholder=\"Player Name\"><button type=\"submit\" id=\"submit\">Enter</button><script src=\"admin.js\"></script>" + HtmlHelper.end;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

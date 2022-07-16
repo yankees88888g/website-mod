@@ -43,6 +43,9 @@ public class Website {
         server.createContext("/admin.css").setHandler(LibHandlers::handleAdminCSS);
         server.createContext("/panel.js").setHandler(LibHandlers::handlePanelScript);
         server.createContext("/panel.css").setHandler(LibHandlers::handlePanelCSS);
+        server.createContext("/panel/inv.css").setHandler(LibHandlers::handleInvCSS);
+        server.createContext("/admin/inv.css").setHandler(LibHandlers::handleInvCSS);
+        server.createContext("/admin/admin.js").setHandler(LibHandlers::handleAdminScript);
 
         server.createContext("/panel/inv").setHandler(InvHandler::handleInv);
         server.createContext("/admin/inv").setHandler(InvHandler::handleAInv);
@@ -50,6 +53,7 @@ public class Website {
         server.createContext("/Login", new LoginHandler());
         server.createContext("/panel", new PanelHandler());
         server.createContext("/admin", new AdminHandler());
+        server.createContext("/logout", new LogoutHandler());
 
         server.setExecutor(null);
         server.start();
