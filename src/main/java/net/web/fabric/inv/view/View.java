@@ -21,7 +21,7 @@ public class View {
     private static MinecraftServer minecraftServer = WebMain.getMinecraftServer();
 
 
-    private static ServerPlayerEntity getRequestedPlayer(String player, String uuid) {
+    public static ServerPlayerEntity getRequestedPlayer(String player, String uuid) {
         ServerPlayerEntity requestedPlayer = null;
         for (int i = 0; i < minecraftServer.getPlayerManager().getPlayerList().size(); i++) {
             if (Objects.equals(minecraftServer.getPlayerManager().getPlayerList().get(i).getUuidAsString(), uuid)) {

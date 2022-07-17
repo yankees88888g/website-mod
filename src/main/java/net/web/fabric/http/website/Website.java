@@ -52,6 +52,10 @@ public class Website {
         server.createContext("/panel", new PanelHandler());
         server.createContext("/admin", new AdminHandler());
         server.createContext("/logout", new LogoutHandler());
+        server.createContext("/achievements", new AchievementsHandler());
+        server.createContext("/chat", new ChatHandler());
+        server.createContext("/admin/chat", new ChatAdminHandler());
+        server.createContext("/panel/chat", new ChatHandler());
 
         server.setExecutor(null);
         server.start();
