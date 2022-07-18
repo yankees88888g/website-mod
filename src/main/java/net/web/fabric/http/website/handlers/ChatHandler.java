@@ -3,6 +3,7 @@ package net.web.fabric.http.website.handlers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import net.web.fabric.chat.Chat;
+import net.web.fabric.chat.GetChatLog;
 import net.web.fabric.http.website.login.cred.Credentials;
 
 import java.io.IOException;
@@ -30,7 +31,13 @@ public class ChatHandler implements HttpHandler {
         String response;
         if (Credentials.verify(exchange.getRemoteAddress().getAddress()) == 1) {
             Chat.chat(String.valueOf(cred.playername), cred.uuid, requestChatValue);
-            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"CSSGoes here><body>" + "</body></html>";
+            StringBuilder sm = new StringBuilder();
+            for(int i = 0; GetChatLog.getChatLogs().size() > i; i++) {
+                String sender = GetChatLog.getSender(GetChatLog.getChatLogs().get(i).sender);
+                String msg = GetChatLog.getMsg(GetChatLog.getChatLogs().get(i).msg);
+                sm.append(sender + ": " + msg);
+            }
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"CSSGoes here><body><p>" + sm + "</p></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

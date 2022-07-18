@@ -3,8 +3,10 @@ package net.web.fabric;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
+import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
+import net.web.fabric.chat.GetChatLog;
 import net.web.fabric.commands.CreateAccount;
 import net.web.fabric.commands.CreateAccountAdmin;
 import net.web.fabric.config.File;
@@ -33,6 +35,9 @@ public class WebMain implements ModInitializer {
             CreateAccountAdmin.register(dispatcher);
         });
         ServerLifecycleEvents.SERVER_STARTING.register(this::onLogicalServerStarting);
+        ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> {
+            GetChatLog.chatHistory(new GetChatLog(message, sender, typeKey));
+        });
     }
 
 

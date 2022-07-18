@@ -9,8 +9,8 @@ import java.util.List;
 public class Ach {
     public static LinkedHashMap<String, Ach> ach = new LinkedHashMap<>();
     public List<Advancement> achs;
-    public List<String> ids;
-    public List<Boolean> done;
+    public List<String> ids =  new ArrayList<>();
+    public List<Boolean> done = new ArrayList<>();
     public String name;
 
     public Ach(String name) {
