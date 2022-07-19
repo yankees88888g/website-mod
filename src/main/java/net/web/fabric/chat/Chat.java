@@ -44,7 +44,6 @@ public class Chat {
         String inputLine;
         while ((inputLine = in.readLine()) != null)
             LOGGER.info(inputLine);
-            System.out.println(inputLine);
         in.close();
     }
 }

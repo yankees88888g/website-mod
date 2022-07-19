@@ -7,14 +7,19 @@ import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
 import net.web.fabric.chat.Chat;
-import net.web.fabric.chat.GetChatLog;
+import net.web.fabric.chat.ChatLog;
 import net.web.fabric.commands.CreateAccount;
 import net.web.fabric.commands.CreateAccountAdmin;
+import net.web.fabric.commands.Restart;
+import net.web.fabric.commands.WebsitePort;
 import net.web.fabric.config.File;
+import net.web.fabric.http.website.ServletImp;
 import net.web.fabric.http.website.Website;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.Servlet;
+import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 
 
@@ -37,11 +42,11 @@ public class WebMain implements ModInitializer {
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CreateAccount.register(dispatcher);
             CreateAccountAdmin.register(dispatcher);
+            //Restart.register(dispatcher); broken
+            WebsitePort.register(dispatcher);
         });
         ServerLifecycleEvents.SERVER_STARTING.register(this::onLogicalServerStarting);
-        ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> {
-            GetChatLog.chatHistory(new GetChatLog(message, sender, typeKey));
-        });
+        ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> ChatLog.chatHistory(new ChatLog(message, sender, typeKey)));
     }
 
 
@@ -63,6 +68,7 @@ public class WebMain implements ModInitializer {
     }
 
     private static void runWebsite(int[] x) {
+        ServletImp.runServlet();
         if (x[0] == 1) {
             try {
                 Website.main(x[1], true);

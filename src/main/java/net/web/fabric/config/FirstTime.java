@@ -9,8 +9,7 @@ public class FirstTime {
         Properties prop = new Properties();
         prop.setProperty("port", "8001");
         prop.setProperty("custom-homepage", "false");
-        //prop.setProperty("map", "false");
-        //prop.setProperty("maplink", "replace this with your ip");
+        prop.setProperty("ServerName", "Example-Name");
         try {
             prop.store(new FileOutputStream("config/web.config"), null);
         } catch (IOException e) {

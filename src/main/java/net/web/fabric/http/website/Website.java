@@ -8,21 +8,31 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.servlet.http.HttpServlet;
-import java.io.*;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 @SuppressWarnings("deprecation")
 public class Website {
+    static HttpServer server;
+    private static String contextPath;
+    private static HttpHandler httpHandler;
+
+    public Website(String contextPath, HttpServlet servlet) {
+        Website.contextPath = contextPath;
+        httpHandler = new HttpHandlerWithServletSupport(servlet);
+    }
 
     public static final Logger LOGGER = LoggerFactory.getLogger("website-mod");
     static ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
     public static void main(int port, boolean homepage) throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
+        server = HttpServer.create(new InetSocketAddress(port), 0);
         HttpContext httpContext = server.createContext("/");
+        server.createContext(contextPath).setHandler(httpHandler);
         server.setExecutor(threadPoolExecutor);
+
         if (homepage == false) {
             httpContext.setHandler(LibHandlers::handleRequest);
             server.createContext("/index.js").setHandler(LibHandlers::handleIndexScript);
@@ -30,7 +40,6 @@ public class Website {
         } else {
             httpContext.setHandler(LibHandlers::handleCustom);
         }
-
         server.createContext("/about_us").setHandler(LibHandlers::handleAbout);
         server.createContext("/map").setHandler(LibHandlers::handleMap);
         //to be able to configurable with dynmap and other map mods to redirect to here.
@@ -60,5 +69,14 @@ public class Website {
         server.setExecutor(null);
         server.start();
         LOGGER.info("Server started on port " + port + "!");
+    }
+
+    public static int getServerPort() {
+        return server.getAddress().getPort();
+    }
+
+    public static void restart() {
+        server.stop(0);
+        server.start();
     }
 }

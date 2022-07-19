@@ -9,26 +9,26 @@ import net.minecraft.util.registry.RegistryKey;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GetChatLog {
+public class ChatLog {
 
-    public static List<GetChatLog> chatLog = new ArrayList<>();
+    public static List<ChatLog> chatLog = new ArrayList<>();
     public FilteredMessage<SignedMessage> msg;
     public ServerPlayerEntity sender;
     public RegistryKey<MessageType> mt;
 
-    public GetChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey) {
+    public ChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey) {
         this.msg = message;
         this.sender = sender;
         this.mt = typeKey;
     }
-    public static void chatHistory(GetChatLog getChatLog){
-        if(chatLog.size() == 150){
-            chatLog.remove(0);
+    public static void chatHistory(ChatLog chatLog){
+        if(ChatLog.chatLog.size() == 150){
+            ChatLog.chatLog.remove(0);
         }
-        chatLog.add(getChatLog);
+        ChatLog.chatLog.add(chatLog);
     }
 
-    public static List<GetChatLog> getChatLogs(){
+    public static List<ChatLog> getChatLogs(){
         return chatLog;
     }
 
