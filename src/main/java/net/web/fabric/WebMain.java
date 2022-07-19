@@ -6,12 +6,16 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
+import net.web.fabric.chat.Chat;
 import net.web.fabric.chat.GetChatLog;
 import net.web.fabric.commands.CreateAccount;
 import net.web.fabric.commands.CreateAccountAdmin;
 import net.web.fabric.config.File;
+import net.web.fabric.http.website.Website;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
 
 
 public class WebMain implements ModInitializer {
@@ -29,7 +33,7 @@ public class WebMain implements ModInitializer {
 		LOGGER.info(valueOf(List.count()));
 		LOGGER.info(valueOf(List.name().length));
 		LOGGER.info(valueOf(FabricLoader.getInstance().getAllMods()));*/
-        File.main();
+        runWebsite(File.main());
         CommandRegistrationCallback.EVENT.register((dispatcher, registryAccess, environment) -> {
             CreateAccount.register(dispatcher);
             CreateAccountAdmin.register(dispatcher);
@@ -56,5 +60,26 @@ public class WebMain implements ModInitializer {
 
     public static MinecraftServer getMinecraftServer() {
         return minecraftServer;
+    }
+
+    private static void runWebsite(int[] x) {
+        if (x[0] == 1) {
+            try {
+                Website.main(x[1], true);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            try {
+                Website.main(x[1], false);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        try {
+            Chat.Listener(x[1]);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

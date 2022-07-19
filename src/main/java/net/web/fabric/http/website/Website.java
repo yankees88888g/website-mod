@@ -1,11 +1,13 @@
 package net.web.fabric.http.website;
 
 import com.sun.net.httpserver.HttpContext;
+import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 import net.web.fabric.http.website.handlers.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.http.HttpServlet;
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -18,17 +20,15 @@ public class Website {
     static ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
 
     public static void main(int port, boolean homepage) throws IOException {
-
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
-        HttpContext context = server.createContext("/");
+        HttpContext httpContext = server.createContext("/");
         server.setExecutor(threadPoolExecutor);
-
         if (homepage == false) {
-            context.setHandler(LibHandlers::handleRequest);
+            httpContext.setHandler(LibHandlers::handleRequest);
             server.createContext("/index.js").setHandler(LibHandlers::handleIndexScript);
             server.createContext("/index.css").setHandler(LibHandlers::handleIndexCSS);
         } else {
-            context.setHandler(LibHandlers::handleCustom);
+            httpContext.setHandler(LibHandlers::handleCustom);
         }
 
         server.createContext("/about_us").setHandler(LibHandlers::handleAbout);
