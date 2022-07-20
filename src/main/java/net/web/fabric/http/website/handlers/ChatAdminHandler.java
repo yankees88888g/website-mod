@@ -33,8 +33,8 @@ public class ChatAdminHandler implements HttpHandler {
             Chat.chat(String.valueOf(cred.playername), cred.uuid, requestChatValue);
             StringBuilder sm = new StringBuilder();
             for(int i = 0; ChatLog.getChatLogs().size() > i; i++) {
-                String sender = ChatLog.getSender(ChatLog.getChatLogs().get(i).sender);
-                String msg = ChatLog.getMsg(ChatLog.getChatLogs().get(i).msg);
+                String sender = ChatLog.getChatLogs().get(i).sender;
+                String msg = ChatLog.getChatLogs().get(i).msg;
                 sm.append(sender + ": " + msg);
             }
             response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"CSSGoes here><body>" + sm + "</body></html>";

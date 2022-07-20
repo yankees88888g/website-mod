@@ -9,34 +9,36 @@ import net.minecraft.util.registry.RegistryKey;
 import java.util.ArrayList;
 import java.util.List;
 
+import static javax.swing.UIManager.getString;
+import static net.web.fabric.WebMain.LOGGER;
+
 public class ChatLog {
 
     public static List<ChatLog> chatLog = new ArrayList<>();
-    public FilteredMessage<SignedMessage> msg;
-    public ServerPlayerEntity sender;
+    public String msg;
+    public String sender;
     public RegistryKey<MessageType> mt;
 
     public ChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey) {
-        this.msg = message;
-        this.sender = sender;
+        this.msg = getString(message.filtered().getContent());
+        this.sender = getString(sender.getDisplayName());
         this.mt = typeKey;
+        if(chatLog.size() == 150){
+            chatLog.remove(0);
+        }
+        chatLog.add(this);
     }
-    public static void chatHistory(ChatLog chatLog){
+
+    /*public static void chatHistory(ChatLog chatLog){
         if(ChatLog.chatLog.size() == 150){
             ChatLog.chatLog.remove(0);
         }
         ChatLog.chatLog.add(chatLog);
-    }
+        LOGGER.info(String.valueOf(ChatLog.chatLog.get(1)));
+    }*/
 
     public static List<ChatLog> getChatLogs(){
         return chatLog;
     }
 
-    public static String getSender(ServerPlayerEntity sender){
-        return sender.getDisplayName().toString();
-    }
-
-    public static String getMsg(FilteredMessage<SignedMessage> message){
-        return String.valueOf(message.filtered().getContent());
-    }
 }

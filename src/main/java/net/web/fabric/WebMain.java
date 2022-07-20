@@ -46,9 +46,11 @@ public class WebMain implements ModInitializer {
             WebsitePort.register(dispatcher);
         });
         ServerLifecycleEvents.SERVER_STARTING.register(this::onLogicalServerStarting);
-        ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> ChatLog.chatHistory(new ChatLog(message, sender, typeKey)));
-    }
 
+        ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> {
+            new ChatLog(message, sender, typeKey);
+        });
+    }
 
     private String strArrayToStr(String[] array) {
         StringBuffer sb = new StringBuffer();
