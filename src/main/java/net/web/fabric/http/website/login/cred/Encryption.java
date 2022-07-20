@@ -1,8 +1,5 @@
 package net.web.fabric.http.website.login.cred;
 
-import com.ibm.icu.impl.LocaleDisplayNamesImpl;
-import net.minecraft.text.Text;
-import org.jasypt.encryption.StringEncryptor;
 import org.jasypt.encryption.pbe.StandardPBEStringEncryptor;
 import org.jasypt.properties.EncryptableProperties;
 
@@ -46,7 +43,7 @@ public class Encryption {
         }
     }
 
-    public static void write(String username, String password, boolean admin, String uuid, Text playerName) {
+    public static void write(String username, String password, boolean admin, String uuid, String playerName) {
         if (username == "null") {
             return;
         } else {
@@ -66,7 +63,7 @@ public class Encryption {
             props.setProperty("datasource.password", encryptor.encrypt(password));
             props.setProperty("uuid", uuid);
             props.setProperty("admin", String.valueOf(admin));
-            props.setProperty("playerName", String.valueOf(playerName));
+            props.setProperty("playerName", playerName);
             for (int i = 0; ; ) {
                 //checks if player already has an account
                 Path path = Path.of("config/cred/cred" + i + ".properties");
@@ -103,7 +100,7 @@ public class Encryption {
         }
     }
 
-    public static Text getPlayerName(String username, String password) {
+    public static String getPlayerName(String username, String password) {
         StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
         decryptor.setPassword("Vuqbnlesr6PEmpkd");
         Properties props = new EncryptableProperties(decryptor);
@@ -118,7 +115,7 @@ public class Encryption {
                 throw new RuntimeException(e);
             }
             if (Objects.equals(decryptor.decrypt(props.getProperty("datasource.username")), username) && Objects.equals(decryptor.decrypt(props.getProperty("datasource.password")), password)) {
-                return Text.of(props.getProperty("playerName"));
+                return props.getProperty("playerName");
             }
         }
     }

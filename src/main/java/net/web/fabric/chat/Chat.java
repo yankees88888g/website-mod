@@ -12,22 +12,20 @@ import java.net.URL;
 import java.net.URLConnection;
 
 import static net.web.fabric.WebMain.LOGGER;
-import static net.web.fabric.config.File.port;
 import static net.web.fabric.inv.view.View.getRequestedPlayer;
 
 public class Chat {
-    private static MinecraftServer minecraftServer = WebMain.getMinecraftServer();
 
     public static void chat(String player, String uuid, String msg) {
 
-        ServerPlayerEntity requestedPlayer = minecraftServer.getPlayerManager().getPlayer(player);
+        ServerPlayerEntity requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().getPlayer(player);
         if (requestedPlayer == null) {
             requestedPlayer = getRequestedPlayer(player, uuid);
         }
         if (isDisabled(requestedPlayer)) {
             return;
         } else {
-            minecraftServer.getPlayerManager().broadcast(Text.literal("Web-").append(requestedPlayer.getDisplayName()).append(": ").append(msg), MessageType.SYSTEM);
+            WebMain.getMinecraftServer().getPlayerManager().broadcast(Text.literal("Web-").append(requestedPlayer.getDisplayName()).append(": ").append(msg), MessageType.SYSTEM);
             return;
         }
     }

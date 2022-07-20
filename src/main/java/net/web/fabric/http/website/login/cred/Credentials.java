@@ -11,11 +11,11 @@ public class Credentials {
     public InetAddress address;
     public String username;
     public boolean admin;
-    public Text playername;
+    public String playername;
     public String uuid;
 
 
-    public Credentials(InetAddress adr, String username, boolean admin, Text playerName, String uuid) {
+    public Credentials(InetAddress adr, String username, boolean admin, String playerName, String uuid) {
         this.strAdr = String.valueOf(adr);
         this.address = adr;
         this.username = username;

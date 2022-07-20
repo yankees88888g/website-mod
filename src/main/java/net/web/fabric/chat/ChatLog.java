@@ -9,8 +9,6 @@ import net.minecraft.util.registry.RegistryKey;
 import java.util.ArrayList;
 import java.util.List;
 
-import static javax.swing.UIManager.getString;
-import static net.web.fabric.WebMain.LOGGER;
 
 public class ChatLog {
 
@@ -19,23 +17,20 @@ public class ChatLog {
     public String sender;
     public RegistryKey<MessageType> mt;
 
-    public ChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey) {
-        this.msg = getString(message.filtered().getContent());
-        this.sender = getString(sender.getDisplayName());
+    public ChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey, String web, String webMsg) {
+        if(web == null || webMsg == null) {
+            this.msg = message.filtered().getContent().getString();
+            this.sender = sender.getDisplayName().getString();
+        } else {
+            this.msg = webMsg;
+            this.sender = web;
+        }
         this.mt = typeKey;
         if(chatLog.size() == 150){
             chatLog.remove(0);
         }
         chatLog.add(this);
     }
-
-    /*public static void chatHistory(ChatLog chatLog){
-        if(ChatLog.chatLog.size() == 150){
-            ChatLog.chatLog.remove(0);
-        }
-        ChatLog.chatLog.add(chatLog);
-        LOGGER.info(String.valueOf(ChatLog.chatLog.get(1)));
-    }*/
 
     public static List<ChatLog> getChatLogs(){
         return chatLog;

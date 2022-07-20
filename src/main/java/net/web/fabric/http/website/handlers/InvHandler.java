@@ -19,9 +19,9 @@ public class InvHandler {
         Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
         String response;
         if (Credentials.verify(exchange.getRemoteAddress().getAddress()) == 1) {
-            View.inv(String.valueOf(cred.playername), cred.uuid);
-            View.eChest(String.valueOf(cred.playername), cred.uuid);
-            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"><body>Inventory<br>" + htmlBuilder(Gui.getInv(String.valueOf(cred.playername))) + "<br>Ender Chest<br>" + htmlBuilderEC(GuiEC.getInv(String.valueOf(cred.playername))) + "</body></html>";
+            View.inv(cred.playername, cred.uuid);
+            View.eChest(cred.playername, cred.uuid);
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + cred.playername + "</title><style>body {-moz-transform: scale(2.0); /* for Firefox, default 1*/zoom:200%; /* For Chrome, IE, default 100%*/}</style></head><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"><body>Inventory<br>" + htmlBuilder(Gui.getInv(String.valueOf(cred.playername))) + "<br>Ender Chest<br>" + htmlBuilderEC(GuiEC.getInv(cred.playername)) + "</body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();
@@ -54,7 +54,7 @@ public class InvHandler {
         if (Credentials.verifyAdmin(exchange.getRemoteAddress().getAddress()) == 1) {
             View.inv(String.valueOf(player), View.getUUID(player));
             View.eChest(String.valueOf(player), View.getUUID(player));
-            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + player + "</title></head><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"><body>Inventory of " + player + "<br>" + htmlBuilder(Gui.getInv(player)) + "<br>Ender Chest of " + player + "<br>" + htmlBuilderEC(GuiEC.getInv(player)) + "<br><input type=\"text\" name=\"player\" id=\"player\" class=\"player-field\" placeholder=\"Player Name\"><button type=\"submit\" id=\"submit\">Enter</button><script src=\"admin.js\"></script></body></html>";
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + player + "</title><style>body {-moz-transform: scale(2.0); /* for Firefox, default 1*/zoom:200%; /* For Chrome, IE, default 100%*/}</style></head><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"><body>Inventory of " + player + "<br>" + htmlBuilder(Gui.getInv(player)) + "<br>Ender Chest of " + player + "<br>" + htmlBuilderEC(GuiEC.getInv(player)) + "<br><input type=\"text\" name=\"player\" id=\"player\" class=\"player-field\" placeholder=\"Player Name\"><button type=\"submit\" id=\"submit\">Enter</button><script src=\"admin.js\"></script></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

@@ -18,21 +18,20 @@ import java.util.UUID;
 import static net.web.fabric.http.website.Website.LOGGER;
 
 public class View {
-    private static MinecraftServer minecraftServer = WebMain.getMinecraftServer();
 
 
     public static ServerPlayerEntity getRequestedPlayer(String player, String uuid) {
         ServerPlayerEntity requestedPlayer = null;
-        for (int i = 0; i < minecraftServer.getPlayerManager().getPlayerList().size(); i++) {
-            if (Objects.equals(minecraftServer.getPlayerManager().getPlayerList().get(i).getUuidAsString(), uuid)) {
-                requestedPlayer = minecraftServer.getPlayerManager().getPlayerList().get(i);
+        for (int i = 0; i < WebMain.getMinecraftServer().getPlayerManager().getPlayerList().size(); i++) {
+            if (Objects.equals(WebMain.getMinecraftServer().getPlayerManager().getPlayerList().get(i).getUuidAsString(), uuid)) {
+                requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().getPlayerList().get(i);
             }
         }
         if (requestedPlayer == null) {
-            requestedPlayer = minecraftServer.getPlayerManager().createPlayer(new GameProfile(UUID.fromString(uuid), player), null);
-            NbtCompound compound = minecraftServer.getPlayerManager().loadPlayerData(requestedPlayer);
+            requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().createPlayer(new GameProfile(UUID.fromString(uuid), player), null);
+            NbtCompound compound = WebMain.getMinecraftServer().getPlayerManager().loadPlayerData(requestedPlayer);
             if (compound != null) {
-                ServerWorld world = minecraftServer.getWorld(DimensionType.worldFromDimensionNbt(new Dynamic<>(NbtOps.INSTANCE, compound.get("Dimension"))).result().get());
+                ServerWorld world = WebMain.getMinecraftServer().getWorld(DimensionType.worldFromDimensionNbt(new Dynamic<>(NbtOps.INSTANCE, compound.get("Dimension"))).result().get());
                 if (world != null) {
                     requestedPlayer.setWorld(world);
                 }
@@ -42,7 +41,7 @@ public class View {
     }
 
     public static int inv(String user, String uuid) {
-        ServerPlayerEntity requestedPlayer = minecraftServer.getPlayerManager().getPlayer(user);
+        ServerPlayerEntity requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().getPlayer(user);
         if(requestedPlayer == null) {
             requestedPlayer = getRequestedPlayer(user, uuid);
         }
@@ -75,7 +74,7 @@ public class View {
     }
 
     public static String getUUID(String player) {
-        return minecraftServer.getUserCache().findByName(player).get().getId().toString();
+        return WebMain.getMinecraftServer().getUserCache().findByName(player).get().getId().toString();
     }
 
     private static boolean isProtected(ServerPlayerEntity playerEntity) {

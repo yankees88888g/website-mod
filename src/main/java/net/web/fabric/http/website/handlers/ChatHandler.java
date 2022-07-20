@@ -33,18 +33,15 @@ public class ChatHandler implements HttpHandler {
         Credentials cred = Credentials.getCred(exchange.getRemoteAddress().getAddress());
         String response;
         if (verify(exchange.getRemoteAddress().getAddress()) == 1) {
-            Chat.chat(String.valueOf(cred.playername), cred.uuid, requestChatValue);
+            Chat.chat(cred.playername, cred.uuid, requestChatValue);
+            new ChatLog(null, null, null, "Web-" + cred.playername, requestChatValue);
             StringBuilder sm = new StringBuilder();
-            LOGGER.info("t");
             for(int i = 0; i < ChatLog.getChatLogs().size(); i++) {
-                LOGGER.info(String.valueOf(ChatLog.getChatLogs().get(i)));
                 String sender = ChatLog.getChatLogs().get(i).sender;
-                LOGGER.info(sender);
                 String msg = ChatLog.getChatLogs().get(i).msg;
                 sm.append(sender + ": " + msg + "<br>");
-                LOGGER.info(sender + ": " + msg + "<br>");
             }
-            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"CSSGoes here><body><p>" + sm + "</p></body></html>";
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"CSSGoes here\"><body><p>" + sm + "</p></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

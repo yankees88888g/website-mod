@@ -11,11 +11,10 @@ import static net.web.fabric.http.website.Website.LOGGER;
 import static net.web.fabric.inv.view.View.getRequestedPlayer;
 
 public class Achievement {
-    private static MinecraftServer minecraftServer = WebMain.getMinecraftServer();
 
     public static void getAchievement(String player, String uuid) {
         try {
-            ServerPlayerEntity requestedPlayer = minecraftServer.getPlayerManager().getPlayer(player);
+            ServerPlayerEntity requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().getPlayer(player);
 
             if (requestedPlayer == null) {
                 requestedPlayer = getRequestedPlayer(player, uuid);
@@ -25,7 +24,7 @@ public class Achievement {
             } else {
                 LOGGER.info("tes");
                 Ach ach = new Ach(player);
-                Collection<Advancement> advancements = minecraftServer.getAdvancementLoader().getAdvancements();
+                Collection<Advancement> advancements = WebMain.getMinecraftServer().getAdvancementLoader().getAdvancements();
                 int i = 0;
                 for (Advancement a : advancements) {
                     ach.addAch(i, a, requestedPlayer.getAdvancementTracker().getProgress(a).isDone(), a.getId().toString());

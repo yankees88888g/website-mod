@@ -41,7 +41,7 @@ public class LoginHandler implements HttpHandler {
         String password = parts[1];
         OutputStream os = exchange.getResponseBody();
         if (read(username, password) == 1) {//admin
-            Text playerName = getPlayerName(username, password);
+            String playerName = getPlayerName(username, password);
             String response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /panel\" /></head><body><p>Logged in as " + username + "<br> Admin account" + "redirecting to panel</p></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
@@ -49,7 +49,7 @@ public class LoginHandler implements HttpHandler {
             cred.register();
             os.close();
         } else if (read(username, password) == 2) {//non admin
-            Text playerName = getPlayerName(username, password);
+            String playerName = getPlayerName(username, password);
             String response = "<!DOCTYPE html><html><head><title>login</title><meta http-equiv = \"refresh\" content = \"0.1; url = /panel\" /></head><body><p>Logged in as " + username + " redirecting to panel</p></body></html>";
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());

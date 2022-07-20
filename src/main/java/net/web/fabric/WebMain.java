@@ -18,8 +18,6 @@ import net.web.fabric.http.website.Website;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.servlet.Servlet;
-import javax.servlet.http.HttpServlet;
 import java.io.IOException;
 
 
@@ -48,7 +46,7 @@ public class WebMain implements ModInitializer {
         ServerLifecycleEvents.SERVER_STARTING.register(this::onLogicalServerStarting);
 
         ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> {
-            new ChatLog(message, sender, typeKey);
+            new ChatLog(message, sender, typeKey, null, null);
         });
     }
 
