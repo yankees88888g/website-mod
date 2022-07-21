@@ -53,6 +53,9 @@ public class Website {
         server.createContext("/panel.js").setHandler(LibHandlers::handlePanelScript);
         server.createContext("/panel.css").setHandler(LibHandlers::handlePanelCSS);
         server.createContext("/admin/admin.js").setHandler(LibHandlers::handleAdminScript);
+        server.createContext("/ach.css").setHandler(LibHandlers::handleAchCSS);
+        server.createContext("/panel/ach.css").setHandler(LibHandlers::handleAchCSS);
+        //server.createContext("/admin/panel.css").setHandler(LibHandlers::handleAchCSS);
 
         server.createContext("/panel/inv").setHandler(InvHandler::handleInv);
         server.createContext("/admin/inv").setHandler(InvHandler::handleAInv);
@@ -62,6 +65,8 @@ public class Website {
         server.createContext("/admin", new AdminHandler());
         server.createContext("/logout", new LogoutHandler());
         server.createContext("/achievements", new AchievementsHandler());
+        server.createContext("/panel/achievements", new AchievementsHandler());
+        //server.createContext("/admin/achievements", new AchievementsHandler());
         server.createContext("/chat", new ChatHandler());
         server.createContext("/admin/chat", new ChatAdminHandler());
         server.createContext("/panel/chat", new ChatHandler());

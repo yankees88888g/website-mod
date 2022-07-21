@@ -1,0 +1,70 @@
+@font-face {
+    font-family: Minecraft;
+    src: url("https://minecraft.fandom.com/media/hydra/fonts/minecraft.ttf")
+            format("truetype"),
+        url("https://minecraft.fandom.com/media/hydra/fonts/minecraft.woff")
+            format("woff");
+}
+* {
+  box-sizing: border-box;
+}
+.column {
+  float: left;
+  width: 50%;
+  padding: 15px;
+}
+
+#desc {
+    font-family: Minecraft, SimSun;
+    font-size: 10px;
+    height: 40px;
+    width: 245px;
+    margin-left: 50px;
+    margin-top: -22px;
+    color: #FFFFFF;
+}
+
+#clr {
+    font-family: Minecraft;
+    font-size: 13.5px;
+    height: 25px;
+    width: 300px;
+    margin-left: 50px;
+    margin-top: -58px;
+    color: #FFFF00;
+}
+
+#icon {
+    margin-left: -305px;
+    margin-top: -60px;
+}
+
+#descF {
+    font-family: Minecraft, SimSun;
+    font-size: 10px;
+    height: 40px;
+    width: 245px;
+    margin-left: 50px;
+    margin-top: -22px;
+    color: #FFFFFF;
+}
+
+#clrF {
+    font-family: Minecraft;
+    font-size: 13.5px;
+    height: 25px;
+    width: 300px;
+    margin-left: 50px;
+    margin-top: -58px;
+    color: #FFFF00;
+}
+
+#iconF {
+    margin-left: -305px;
+    margin-top: -60px;
+}
+
+h1 {
+    font-family: Minecraft;
+    font-size: 28px;
+}

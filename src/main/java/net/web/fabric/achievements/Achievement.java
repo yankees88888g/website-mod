@@ -1,7 +1,6 @@
 package net.web.fabric.achievements;
 
 import net.minecraft.advancement.Advancement;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.web.fabric.WebMain;
 
@@ -22,14 +21,19 @@ public class Achievement {
             if (isProtected(requestedPlayer)) {
                 return;
             } else {
-                LOGGER.info("tes");
                 Ach ach = new Ach(player);
                 Collection<Advancement> advancements = WebMain.getMinecraftServer().getAdvancementLoader().getAdvancements();
-                int i = 0;
                 for (Advancement a : advancements) {
-                    ach.addAch(i, a, requestedPlayer.getAdvancementTracker().getProgress(a).isDone(), a.getId().toString());
-                    i++;
+                    if (a.getDisplay() != null) {
+                        ach.addAch( new AchData(a, requestedPlayer.getAdvancementTracker().getProgress(a).isDone()));
+                    }
                 }
+               /* for (Advancement a : advancements) {
+                    if (a.getDisplay() == null) {
+                        ach.addAch(i, a, requestedPlayer.getAdvancementTracker().getProgress(a).isDone(), a.getId().toString(),null);
+                    }
+                    i++;
+                }*/
                 ach.register();
                 LOGGER.info(String.valueOf(ach));
                 return;

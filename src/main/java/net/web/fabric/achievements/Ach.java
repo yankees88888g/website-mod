@@ -8,20 +8,15 @@ import java.util.List;
 
 public class Ach {
     public static LinkedHashMap<String, Ach> ach = new LinkedHashMap<>();
-    public List<Advancement> achs;
-    public List<String> ids =  new ArrayList<>();
-    public List<Boolean> done = new ArrayList<>();
+    public List<AchData> data = new ArrayList<>();
     public String name;
 
     public Ach(String name) {
         this.name = name;
-        this.achs = new ArrayList<>();
     }
 
-    public void addAch(int i, Advancement achi, boolean done, String id) {
-        this.achs.add(i, achi);
-        this.done.add(i, done);
-        this.ids.add(i, id);
+    public void addAch(AchData achData) {
+        this.data.add(achData);
     }
 
     public void register() {
