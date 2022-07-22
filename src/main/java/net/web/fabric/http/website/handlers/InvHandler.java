@@ -69,17 +69,19 @@ public class InvHandler {
                 html.append("<br>");
             }
             if (j < 9) {
-                html.append(getHtmlFromItemStack(slot, 0, 9, false));
+                html.append(getHtmlFromItemStack(slot, 0, 9, true));
             } else if (j < 18) {
-                html.append(getHtmlFromItemStack(slot, 0, 18, false));
+                html.append(getHtmlFromItemStack(slot, 0, 18, true));
             } else if (j < 27) {
-                html.append(getHtmlFromItemStack(slot, 0, 27, false));
+                html.append(getHtmlFromItemStack(slot, 0, 27, true));
             }
         }
         html.append("<div class ECText>");
         for (int j = 0, slotsSize = slots.size(); j < slotsSize; j++) {
-            if (j % 9 == 0) {
-                html.append("<br>");
+            if (j == 0) {
+                html.append("<div id=e" + 0 + ">");
+            } else {
+                html.append("</div><div id=e" + j + ">");
             }
             html.append(slots.get(j).getCount());
         }
@@ -128,7 +130,7 @@ public class InvHandler {
         String a = String.valueOf(itemStack.getItem());
         String c = a.replace("_", "-");
         if (ec == true) {
-            return "<i id=iconEC" + inv + "class=\"icon-minecraft icon-minecraft-" + c + "\"></i>";
+            return "<i id=iconEC" + inv + " class=\"icon-minecraft icon-minecraft-" + c + "\"></i>";
         } else {
             if (s36 == 0) {
                 if (inv != 0) {
