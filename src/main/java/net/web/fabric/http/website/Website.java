@@ -56,6 +56,8 @@ public class Website {
         server.createContext("/ach.css").setHandler(LibHandlers::handleAchCSS);
         server.createContext("/panel/ach.css").setHandler(LibHandlers::handleAchCSS);
         //server.createContext("/admin/panel.css").setHandler(LibHandlers::handleAchCSS);
+        server.createContext("/panel/inv.css").setHandler(LibHandlers::handleInvCSS);
+        server.createContext("/admin/inv.css").setHandler(LibHandlers::handleInvCSS);
 
         server.createContext("/panel/inv").setHandler(InvHandler::handleInv);
         server.createContext("/admin/inv").setHandler(InvHandler::handleAInv);
