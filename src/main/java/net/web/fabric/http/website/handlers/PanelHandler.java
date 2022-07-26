@@ -22,7 +22,8 @@ public class PanelHandler implements HttpHandler {
                 a = "<br><br><li><a href=\"/admin\" class=\"button\">Enter Admin Panel.</a></li>";
             }
             String username = cred.username;
-            String response = HtmlHelper.title1 + "Panel: " + username + HtmlHelper.title2CSS + "panel.css\">" + HtmlHelper.CSS2Body + "<h3>Entered panel as " + username + "</h3><br><br><li><a href=\"/panel/inv\" class=\"button\">View Your Inventory.</a></li>" + a + HtmlHelper.end;
+            String response = HtmlHelper.title1 + "Panel: " + username + HtmlHelper.title2CSS + "panel.css\">" + HtmlHelper.CSS2Body + "<h3>Entered panel as " + username + "</h3><br><br><li><a href=\"/panel/inv\" class=\"button\">View Your Inventory.</a></li><br>\n" +
+                    "<li><a href=\"/achievements\" class=\"button\">Achievements</a></li>" + a + HtmlHelper.end;
             exchange.sendResponseHeaders(200, response.length());
             os.write(response.getBytes());
             os.close();

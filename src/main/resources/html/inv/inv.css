@@ -8,7 +8,7 @@
 
 #inv{
     margin-left: 140px;
-    margin-top: 110px;
+    margin-top: 130px;
     transform: scale(2.7);
     z-index: -1;
     position:relative;
@@ -83,144 +83,162 @@
 }
 
 #n0{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -100px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 30px;
 }
 
 #n1{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -17.5px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 78px;
 }
 
 #n2{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 128px;
 }
 
 #n3{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 175px;
 }
 
 #n4{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 225px;
 }
 
 #n5{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 270px;
 }
 
 #n6{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 320px;
 }
 
 #n7{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 370px;
 }
 
 #n8{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 72px;
     color: white;
     font-size: 16.5px;
     margin-left: 420px;
 }
 
 #n9{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -174px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 30px;
 }
 
 #n10{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 78px;
 }
 
 #n11{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 128px;
 }
 
 #n12{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 175px;
 }
 
 #n13{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -17px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 225px;
 }
 
 #n14{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -17px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 270px;
 }
 
 #n15{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -17px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 320px;
 }
 
 #n16{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 370px;
 }
 
 #n17{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -85px;
     color: white;
     font-size: 16.5px;
     margin-left: 420px;
@@ -228,158 +246,179 @@
 
 
 #n18{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: 32px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 30px;
 }
 
 #n19{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 78px;
 }
 
 #n20{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 128px;
 }
 
 #n21{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 175px;
 }
 
 #n22{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 225px;
 }
 
 #n23{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 270px;
 }
 
 #n24{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 320px;
 }
 
 #n25{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 370px;
 }
 
 #n26{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: -38px;
     color: white;
     font-size: 16.5px;
     margin-left: 420px;
 }
 
 #n27{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: 33px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 30px;
 }
 
 #n28{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 78px;
 }
 
 #n29{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 128px;
 }
 
 #n30{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 175px;
 }
 
 #n31{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 225px;
 }
 
 #n32{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 270px;
 }
 
 #n33{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 320px;
 }
 
 #n34{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 370px;
 }
 
 #n35{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: -16.5px;
+    margin-top: 12px;
     color: white;
     font-size: 16.5px;
     margin-left: 420px;
 }
 
 #n36{
+    visibility: hidden;
     font-family: Minecraft;
-    margin-top: -172px;
+    margin-top: -175px;
     color: white;
     font-size: 16.5px;
     margin-left: 30px;
 }
 
 #n37{
+    visibility: hidden;
+    position: absolute;
     font-family: Minecraft;
     margin-top: -65px;
     color: white;
@@ -388,6 +427,8 @@
 }
 
 #n38{
+    visibility: hidden;
+    position: absolute;
     font-family: Minecraft;
     margin-top: -65px;
     color: white;
@@ -396,6 +437,8 @@
 }
 
 #n39{
+    visibility: hidden;
+    position: absolute;
     font-family: Minecraft;
     margin-top: -65px;
     color: white;
@@ -404,8 +447,9 @@
 }
 
 #n40{
+    position: absolute;
     font-family: Minecraft;
-    margin-top: 130px;
+    margin-top: -160px;
     color: white;
     font-size: 16.5px;
     margin-left: 215px;
