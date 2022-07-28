@@ -8,9 +8,7 @@ import net.web.fabric.http.website.login.cred.Credentials;
 
 import java.io.IOException;
 import java.io.OutputStream;
-
-import static net.web.fabric.http.website.login.cred.Credentials.verify;
-
+/*
 public class ChatHandler implements HttpHandler {
 
     public void handle(HttpExchange httpExchange) throws IOException {
@@ -56,4 +54,4 @@ public class ChatHandler implements HttpHandler {
         os.write(response.getBytes());
         os.close();
     }
-}
+}*/

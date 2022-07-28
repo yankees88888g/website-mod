@@ -15,7 +15,7 @@ import java.util.Properties;
         loadOnStartup = 1)
 public class Encryption {
 
-    public static int read(String username, String password) {
+    public static Credentials read(String username, String password) {
         File file = new File("config/cred");
         StandardPBEStringEncryptor decryptor = new StandardPBEStringEncryptor();
         decryptor.setPassword("Vuqbnlesr6PEmpkd");
@@ -23,7 +23,7 @@ public class Encryption {
         for (int i = 0; ; ) {
             Path path = Path.of("config/cred/cred" + i + ".properties");
             if (Files.exists(path) == false) {
-                return 0;
+                return null;
             } else {
                 try {
                     props.load(new FileInputStream("config/cred/cred" + i + ".properties"));
@@ -31,11 +31,7 @@ public class Encryption {
                     throw new RuntimeException(e);
                 }
                 if (Objects.equals(decryptor.decrypt(props.getProperty("datasource.username")), username) && Objects.equals(decryptor.decrypt(props.getProperty("datasource.password")), password)) {
-                    if (Objects.equals(props.getProperty("admin"), "true")) {
-                        return 1;
-                    } else {
-                        return 2;
-                    }
+                    return new Credentials(username, Boolean.parseBoolean(props.getProperty("admin")), props.getProperty("playerName"), props.getProperty("uuid"));
                 } else {
                     i++;
                 }
@@ -44,7 +40,7 @@ public class Encryption {
     }
 
     public static void write(String username, String password, boolean admin, String uuid, String playerName) {
-        if (username == "null") {
+        if (Objects.equals(username, "null")) {
             return;
         } else {
             File file = new File("config/cred");

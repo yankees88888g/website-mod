@@ -1,25 +1,20 @@
 package net.web.fabric.http.website.handlers;
 
-import com.sun.net.httpserver.HttpExchange;
-import com.sun.net.httpserver.HttpHandler;
+import io.javalin.http.Context;
+import io.javalin.http.Handler;
 import net.web.fabric.achievements.Ach;
 import net.web.fabric.achievements.AchData;
 import net.web.fabric.achievements.Achievement;
 import net.web.fabric.http.website.login.cred.Credentials;
+import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.OutputStream;
+public class AchievementsHandler implements Handler {
 
-import static net.web.fabric.http.website.login.cred.Credentials.getCred;
-import static net.web.fabric.http.website.login.cred.Credentials.verify;
-
-public class AchievementsHandler implements HttpHandler {
-
-    public void handle(HttpExchange exchange) throws IOException {
-        Credentials cred = getCred(exchange.getRemoteAddress().getAddress());
-        OutputStream os = exchange.getResponseBody();
+    @Override
+    public void handle(@NotNull Context ctx) throws Exception {
+        Credentials cred = ctx.sessionAttribute("YVWcMlUyh8alOG8XeKsitowrfgsfged434AM0s2AVhS5");
         String response;
-        if (verify(exchange.getRemoteAddress().getAddress()) == 1) {
+        if (cred != null) {
             Achievement.getAchievement(cred.username, cred.uuid);
             Ach ach = Ach.getAch(cred.username);
             StringBuilder c = new StringBuilder();
@@ -42,12 +37,10 @@ public class AchievementsHandler implements HttpHandler {
                 }
             }
             c.append("</div>");
-            response = HtmlHelper.title1 + "Achievements: " + cred.playername + "</title><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"></title><link rel=\"stylesheet\" href=\"ach.css\">" + HtmlHelper.CSS2Body + c + HtmlHelper.end;
+            response = HtmlHelper.title1 + "Achievements: " + cred.playername + "</title><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"></title><link rel=\"stylesheet\" href=\"achievements/ach.css\">" + HtmlHelper.CSS2Body + c + HtmlHelper.end;
         } else {
             response = HtmlHelper.redirect;
         }
-        exchange.sendResponseHeaders(200, response.length());
-        os.write(response.getBytes());
-        os.close();
+        ctx.html(response);
     }
 }

@@ -15,6 +15,7 @@ import net.web.fabric.commands.WebsitePort;
 import net.web.fabric.config.File;
 import net.web.fabric.http.website.ServletImp;
 import net.web.fabric.http.website.Website;
+import net.web.fabric.website.Website1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,8 +69,9 @@ public class WebMain implements ModInitializer {
     }
 
     private static void runWebsite(int[] x) {
+        Website1.start(x[1], x[0]);
         ServletImp.runServlet();
-        if (x[0] == 1) {
+        /*if (x[0] == 1) {
             try {
                 Website.main(x[1], true);
             } catch (IOException e) {
@@ -86,6 +88,6 @@ public class WebMain implements ModInitializer {
             Chat.Listener(x[1]);
         } catch (Exception e) {
             throw new RuntimeException(e);
-        }
+        }*/
     }
 }

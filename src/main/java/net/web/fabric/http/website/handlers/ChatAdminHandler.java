@@ -10,7 +10,7 @@ import net.web.fabric.inv.view.View;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class ChatAdminHandler implements HttpHandler {
+/*public class ChatAdminHandler implements HttpHandler {
     public void handle(HttpExchange httpExchange) throws IOException {
         String requestParamValue = null;
         if ("GET".equals(httpExchange.getRequestMethod())) {
@@ -50,4 +50,4 @@ public class ChatAdminHandler implements HttpHandler {
         os.write(response.getBytes());
         os.close();
     }
-}
+}*/
