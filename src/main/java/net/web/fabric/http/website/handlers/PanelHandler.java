@@ -23,7 +23,7 @@ public class PanelHandler implements Handler {
             }
             String username = credentials.username;
             return HtmlHelper.title1 + "Panel: " + username + HtmlHelper.title2CSS + "panel/panel.css\">" + HtmlHelper.CSS2Body + "<h3>Entered panel as " + username + "</h3><br><br><li><a href=\"/panel/inv\" class=\"button\">View Your Inventory.</a></li><br>\n" +
-                    "<li><a href=\"/achievements\" class=\"button\">Achievements</a></li>" + a + HtmlHelper.end;
+                    "<li><a href=\"/achievements\" class=\"button\">Achievements</a></li>" + a + "<br><br><img class=\"skin\" src=\"https://crafatar.com/renders/body/" + credentials.uuid + "\"  alt=\"body\">" + HtmlHelper.end;
 
         } else {
             return HtmlHelper.redirect;
