@@ -6,20 +6,14 @@ import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.message.v1.ServerMessageEvents;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.server.MinecraftServer;
-import net.web.fabric.chat.Chat;
 import net.web.fabric.chat.ChatLog;
 import net.web.fabric.commands.CreateAccount;
 import net.web.fabric.commands.CreateAccountAdmin;
-import net.web.fabric.commands.Restart;
 import net.web.fabric.commands.WebsitePort;
 import net.web.fabric.config.File;
-import net.web.fabric.http.website.ServletImp;
 import net.web.fabric.http.website.Website;
-import net.web.fabric.website.Website1;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 
 public class WebMain implements ModInitializer {
@@ -69,25 +63,6 @@ public class WebMain implements ModInitializer {
     }
 
     private static void runWebsite(int[] x) {
-        Website1.start(x[1], x[0]);
-        ServletImp.runServlet();
-        /*if (x[0] == 1) {
-            try {
-                Website.main(x[1], true);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        } else {
-            try {
-                Website.main(x[1], false);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        try {
-            Chat.Listener(x[1]);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }*/
+        Website.start(x[1], x[0]);
     }
 }

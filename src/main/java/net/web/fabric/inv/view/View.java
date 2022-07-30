@@ -5,17 +5,13 @@ import com.mojang.serialization.Dynamic;
 import net.minecraft.inventory.EnderChestInventory;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtOps;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.world.dimension.DimensionType;
 import net.web.fabric.WebMain;
-import org.apache.commons.logging.Log;
 
 import java.util.Objects;
 import java.util.UUID;
-
-import static net.web.fabric.http.website.Website.LOGGER;
 
 public class View {
 

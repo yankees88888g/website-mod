@@ -6,7 +6,7 @@ import net.web.fabric.WebMain;
 
 import java.util.Collection;
 
-import static net.web.fabric.http.website.Website.LOGGER;
+import static net.web.fabric.WebMain.LOGGER;
 import static net.web.fabric.inv.view.View.getRequestedPlayer;
 
 public class Achievement {

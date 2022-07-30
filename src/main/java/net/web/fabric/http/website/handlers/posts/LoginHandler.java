@@ -1,4 +1,4 @@
-package net.web.fabric.http.website.handlers;
+package net.web.fabric.http.website.handlers.posts;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;

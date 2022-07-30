@@ -1,30 +1,37 @@
-package net.web.fabric.http.website.handlers;
+package net.web.fabric.http.website.handlers.gets;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import net.minecraft.item.ItemStack;
+import net.web.fabric.http.website.handlers.HtmlHelper;
 import net.web.fabric.http.website.login.cred.Credentials;
 import net.web.fabric.inv.view.Gui;
 import net.web.fabric.inv.view.GuiEC;
 import net.web.fabric.inv.view.View;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
 import java.util.List;
 
-public class InvHandler implements Handler {
+public class AInvHandler implements Handler {
 
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
         Credentials cred = ctx.sessionAttribute("YVWcMlUyh8alOG8XeKsitowrfgsfged434AM0s2AVhS5");
+        String player = ctx.queryParam("player");
+        ctx.html(handleAInvResponse(cred, player));
+    }
+
+    public static String handleAInvResponse(Credentials credentials, String player) throws IOException {
         String response;
-        if (cred != null) {
-            View.inv(cred.playername, cred.uuid);
-            View.eChest(cred.playername, cred.uuid);
-            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + cred.playername + "</title><style>body {-moz-transform: scale(2.0); /* for Firefox, default 1*/zoom:200%; /* For Chrome, IE, default 100%*/}</style></head><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"><link rel=\"stylesheet\" href=\"inv.css\"><body><h5 id=\"h\">Inventory</h5><br>" + "<img class=\"skin\" src=\"https://crafatar.com/renders/body/" + cred.uuid + "\"  alt=\"body\">" + "<br><img id=inv src=\"https://i.imgur.com/GxH81To.png\"><p>" + htmlBuilder(Gui.getInv(String.valueOf(cred.playername))) + "</p><br><h5 id=\"hec\" >Ender Chest</h5><br><img id = ec src=\"https://i.imgur.com/HDAtaYU.png\"><p>" + htmlBuilderEC(GuiEC.getInv(cred.playername)) + "</p></body></html>";
+        if (credentials.admin == true) {
+            View.inv(String.valueOf(player), View.getUUID(player));
+            View.eChest(String.valueOf(player), View.getUUID(player));
+            response = "<!DOCTYPE html><html lang=\"en\"><head><title>Inv " + player + "</title><style>body {-moz-transform: scale(2.0); /* for Firefox, default 1*/zoom:200%; /* For Chrome, IE, default 100%*/}</style></head><link rel=\"stylesheet\" href=\"https://www.gamergeeks.net/apps/minecraft/web-developer-tools/css-blocks-and-entities/icons-minecraft-0.5.css\"><link rel=\"stylesheet\" href=\"inv.css\"><body><h5 id=\"h\">Inventory of " + player + "</h5><br>" + "<img class=\"skin\" src=\"https://crafatar.com/renders/body/" + View.getUUID(player) + "\" alt=\"body\">" + "<br><img id= inv src=\"https://i.imgur.com/GxH81To.png\"><p>" + htmlBuilder(Gui.getInv(player)) + "</p><br><h5 id=\"hec\" >Ender Chest of " + player + "</h5><br><img id = ec src=\"https://i.imgur.com/HDAtaYU.png\"><p>" + htmlBuilderEC(GuiEC.getInv(player)) + "</p><br><input type=\"text\" name=\"player\" id=\"player\" class=\"player-field\" placeholder=\"Player Name\"><button type=\"submit\" id=\"submit\">Enter</button><script src=\"admin.js\"></script></body></html>";
         } else {
             response = HtmlHelper.redirect;
         }
-        ctx.html(response);
+        return response;
     }
 
     private static String htmlBuilderEC(GuiEC guiEC) {

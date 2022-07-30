@@ -1,89 +1,74 @@
 package net.web.fabric.http.website;
 
-import com.sun.net.httpserver.HttpContext;
-import com.sun.net.httpserver.HttpHandler;
-import com.sun.net.httpserver.HttpServer;
-import net.web.fabric.http.website.handlers.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
+import net.web.fabric.http.website.handlers.gets.*;
+import net.web.fabric.http.website.handlers.posts.LoginHandler;
+import net.web.fabric.write.ModCount;
 
-import javax.servlet.http.HttpServlet;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import static net.web.fabric.WebMain.LOGGER;
+import static net.web.fabric.http.website.InputStreamClass.html;
 
-@SuppressWarnings("deprecation")
 public class Website {
-    static HttpServer server;
-    private static String contextPath;
-    private static HttpHandler httpHandler;
 
-    public Website(String contextPath, HttpServlet servlet) {
-        Website.contextPath = contextPath;
-        httpHandler = new HttpHandlerWithServletSupport(servlet);
-    }
-
-    public static final Logger LOGGER = LoggerFactory.getLogger("website-mod");
-    static ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newFixedThreadPool(10);
-
-    public static void main(int port, boolean homepage) throws IOException {
-        server = HttpServer.create(new InetSocketAddress(port), 0);
-        HttpContext httpContext = server.createContext("/");
-        server.createContext(contextPath).setHandler(httpHandler);
-        server.setExecutor(threadPoolExecutor);
-
-        if (homepage == false) {
-            httpContext.setHandler(LibHandlers::handleRequest);
-            server.createContext("/index.js").setHandler(LibHandlers::handleIndexScript);
-            server.createContext("/index.css").setHandler(LibHandlers::handleIndexCSS);
+    public static void start(int port, int homepage) {
+        Javalin app = Javalin.create(config -> {
+            config.addStaticFiles(staticFiles -> {
+                staticFiles.hostedPath = "/";
+                staticFiles.directory = "/html";
+                staticFiles.location = Location.CLASSPATH;
+            });
+            config.addStaticFiles(staticFiles -> {
+                staticFiles.hostedPath = "/";
+                staticFiles.directory = "/html/index";
+                staticFiles.location = Location.CLASSPATH;
+            });
+            config.addStaticFiles(staticFiles -> {
+                staticFiles.hostedPath = "/panel";
+                staticFiles.directory = "/html/inv";
+                staticFiles.location = Location.CLASSPATH;
+            });
+            config.addStaticFiles(staticFiles -> {
+                staticFiles.hostedPath = "/admin";
+                staticFiles.directory = "/html/inv";
+                staticFiles.location = Location.CLASSPATH;
+            });
+            config.addStaticFiles(staticFiles -> {
+                staticFiles.hostedPath = "/";
+                staticFiles.directory = "config/html";
+                staticFiles.location = Location.EXTERNAL;
+            });
+        }).start(port);
+        if (homepage != 1) {
+            app.get("/", ctx -> ctx.html(new String(html("html/index/index.html", false, null, false, true))));
         } else {
-            httpContext.setHandler(LibHandlers::handleCustom);
+            app.get("/", ctx -> ctx.html(new String(html("config/html/custom.html", false, null, false, false))));
         }
-        server.createContext("/about_us").setHandler(LibHandlers::handleAbout);
-        server.createContext("/map").setHandler(LibHandlers::handleMap);
-        //to be able to configurable with dynmap and other map mods to redirect to here.
+        app.get("/about_us", ctx -> ctx.html(new String(html("config/html/about_us.html", false, null, false, false))));
+        app.get("/map", ctx -> ctx.html(new String(html("config/html/map.html", true, "<!DOCTYPE html><html><meta http-equiv=\"refresh\" content=\"1; URL=REPLACE-WITH-MAP-WEBSITE\" /><html>", false, false))));
+        //todo fix this ^^^^
+        app.get("/login", ctx -> ctx.html(new String(html("html/login/login-page.html", false, null, false, true))));
+        app.get("/mod-count", ctx -> ctx.html(new String(html("config/html/mod_count.html", true, ModCount.Count, true, false))));
+        app.get("/panel", new PanelHandler());
+        app.get("/admin", new AdminHandler());
+        app.get("/logout", new LogoutHandler());
+        app.get("/achievements", new AchievementsHandler());
+        app.get("/panel/achievements", new AchievementsHandler());
+        //app.get("/chat", new ChatHandler());
+        //app.get("/admin/chat", new ChatAdminHandler());
+        //app.get("/panel/chat", new ChatHandler());
+        app.get("/panel/inv", new InvHandler());
+        app.get("/admin/inv", new AInvHandler());
 
-        server.createContext("/login").setHandler(LibHandlers::handleLogin);
-        server.createContext("/login-page.js").setHandler(LibHandlers::handleLoginScript);
-        server.createContext("/login-page.css").setHandler(LibHandlers::handleLoginCSS);
-        server.createContext("/mod_count").setHandler(LibHandlers::handleModCount);
-        server.createContext("/admin.js").setHandler(LibHandlers::handleAdminScript);
-        server.createContext("/admin.css").setHandler(LibHandlers::handleAdminCSS);
-        server.createContext("/panel.js").setHandler(LibHandlers::handlePanelScript);
-        server.createContext("/panel.css").setHandler(LibHandlers::handlePanelCSS);
-        server.createContext("/admin/admin.js").setHandler(LibHandlers::handleAdminScript);
-        server.createContext("/ach.css").setHandler(LibHandlers::handleAchCSS);
-        server.createContext("/panel/ach.css").setHandler(LibHandlers::handleAchCSS);
-        //server.createContext("/admin/panel.css").setHandler(LibHandlers::handleAchCSS);
-        //server.createContext("/panel/inv.css").setHandler(LibHandlers::handleInvCSS);
-        //server.createContext("/admin/inv.css").setHandler(LibHandlers::handleInvCSS);
+        app.post("/Login", new LoginHandler());
 
-        //server.createContext("/panel/inv").setHandler(InvHandler::handleInv);
-        //server.createContext().setHandler(InvHandler::handleAInv);
-
-        //server.createContext("/Login", new LoginHandler());
-        //server.createContext("/panel", new PanelHandler());
-        //server.createContext("/admin", new AdminHandler());
-        //server.createContext("/logout", new LogoutHandler());
-        //server.createContext("/achievements", new AchievementsHandler());
-        //server.createContext("/panel/achievements", new AchievementsHandler());
-        //server.createContext("/admin/achievements", new AchievementsHandler());
-        //server.createContext("/chat", new ChatHandler());
-        //server.createContext("/admin/chat", new ChatAdminHandler());
-        //server.createContext("/panel/chat", new ChatHandler());
-
-        server.setExecutor(null);
-        server.start();
         LOGGER.info("Server started on port " + port + "!");
     }
 
-    public static int getServerPort() {
-        return server.getAddress().getPort();
+    public static void restart() {
     }
 
-    public static void restart() {
-        server.stop(0);
-        server.start();
+    public static int getServerPort() {
+        return 0;
     }
 }
