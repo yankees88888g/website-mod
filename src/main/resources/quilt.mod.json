@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "quilt_loader": {
+    "group": "net.web.fabric",
+    "id": "website_mod",
+    "version": "${version}",
+    "metadata": {
+      "name": "Website Mod",
+      "description": "https://discord.gg/7qGUCT7kjM Put this in your mods folder, then run the server. Afterwards set your port in the config file as well as customize your about_us.html with notepad and the map.html file.",
+      "contributors": {
+        "yankees88888g": "Owner"
+      },
+      "contact": {
+        "homepage": "https://example.com/",
+        "issues": "https://github.com/QuiltMC/quilt-template-mod/issues",
+        "sources": "https://github.com/QuiltMC/quilt-template-mod"
+      },
+      "icon": "assets/Websitemod/icon.png"
+    },
+    "intermediate_mappings": "net.fabricmc:intermediary",
+    "entrypoints": {
+      "init": "com.example.example_mod.ExampleMod"
+    },
+    "depends": [
+      {
+        "id": "quilt_loader",
+        "versions": ">=0.17.0-"
+      },
+      {
+        "id": "quilted_fabric_api",
+        "versions": ">=2.0.0-"
+      },
+      {
+        "id": "minecraft",
+        "versions": ">=1.19"
+      }
+    ]
+  },
+  "mixin": "example_mod.mixins.json"
+}

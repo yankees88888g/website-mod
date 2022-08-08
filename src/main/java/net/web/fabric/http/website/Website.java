@@ -2,6 +2,7 @@ package net.web.fabric.http.website;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+//import net.web.fabric.http.website.handlers.ChatHandler;
 import net.web.fabric.http.website.handlers.gets.*;
 import net.web.fabric.http.website.handlers.posts.LoginHandler;
 import net.web.fabric.write.ModCount;
