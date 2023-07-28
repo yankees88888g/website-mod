@@ -15,7 +15,7 @@ public class WebsitePort {
 
     private static int onGetPort(CommandContext<ServerCommandSource> serverCommandSourceCommandContext) {
         Website.getServerPort();
-        serverCommandSourceCommandContext.getSource().sendFeedback(Text.of(String.valueOf(Website.getServerPort())),true);
+        //serverCommandSourceCommandContext.getSource().sendFeedback(Text.of(String.valueOf(Website.getServerPort())),true);
         return 1;
     }
 }

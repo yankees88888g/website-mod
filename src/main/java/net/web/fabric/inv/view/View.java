@@ -24,12 +24,12 @@ public class View {
             }
         }
         if (requestedPlayer == null) {
-            requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().createPlayer(new GameProfile(UUID.fromString(uuid), player), null);
+            requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().createPlayer(new GameProfile(UUID.fromString(player), player));
             NbtCompound compound = WebMain.getMinecraftServer().getPlayerManager().loadPlayerData(requestedPlayer);
             if (compound != null) {
                 ServerWorld world = WebMain.getMinecraftServer().getWorld(DimensionType.worldFromDimensionNbt(new Dynamic<>(NbtOps.INSTANCE, compound.get("Dimension"))).result().get());
                 if (world != null) {
-                    requestedPlayer.setWorld(world);
+                    requestedPlayer.setServerWorld(world);
                 }
             }
         }

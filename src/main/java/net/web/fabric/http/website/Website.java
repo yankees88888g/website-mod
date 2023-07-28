@@ -2,14 +2,12 @@ package net.web.fabric.http.website;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
-//import net.web.fabric.http.website.handlers.ChatHandler;
 import net.web.fabric.http.website.handlers.gets.*;
 import net.web.fabric.http.website.handlers.posts.LoginHandler;
 import net.web.fabric.write.ModCount;
 
 import static net.web.fabric.WebMain.LOGGER;
 import static net.web.fabric.http.website.InputStreamClass.html;
-
 public class Website {
 
     public static void start(int port, int homepage) {

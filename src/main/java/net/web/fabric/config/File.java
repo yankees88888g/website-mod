@@ -20,7 +20,7 @@ public class File {
                     Properties prop = new Properties();
                     prop.load(reader);
                     Integer port = Integer.parseInt(prop.getProperty("port"));
-                    boolean homepage = Boolean.parseBoolean(prop.getProperty("custom-homepage"));
+                    boolean homepage = Boolean.parseBoolean(prop.getProperty("customHomepage"));
                     int hp = 0;
                     if (homepage == true) {
                         hp = 1;
