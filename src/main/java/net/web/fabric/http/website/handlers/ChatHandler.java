@@ -12,7 +12,7 @@ public class ChatHandler implements Handler {
     @Override
     public void handle(@NotNull Context ctx) throws Exception {
         Credentials cred = ctx.sessionAttribute("YVWcMlUyh8alOG8XeKsitowrfgsfged434AM0s2AVhS5");
-        String response;
+        String response = null;
         String requestChatValue = ctx.queryParam("msg");
         String input = "<form id=\"form\">\n" +
                 "    <input name=\"chat\" type=\"text\">\n" +
@@ -26,13 +26,13 @@ public class ChatHandler implements Handler {
                 String msg = ChatLog.getChatLogs().get(i).msg;
                 sm.append(sender + ": " + msg + "<br>");
             }
-            if (requestChatValue != null) {
+            /*if (requestChatValue != null) {
                 Chat.chat(cred.playername, cred.uuid, requestChatValue);
                 new ChatLog(null, null, null, "Web-" + cred.playername, requestChatValue);
                 response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"chat/chat.css\"><script src=\"chat/chat.js\"></script><body><p>Chat:<br>" + sm + "</p>" + input + "</body></html>";
             } else {
                 response = "<!DOCTYPE html><html lang=\"en\"><head><title>Chat Logged in as " + cred.playername + "</title></head><link rel=\"stylesheet\" href=\"chat/chat.css\"><script src=\"chat/chat.js\"></script><body><p>Chat:<br>" + sm + "</p>" + input + "</body></html>";
-            }
+            }*/
         }else {
             response = HtmlHelper.redirect;
         }

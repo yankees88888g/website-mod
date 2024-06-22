@@ -6,6 +6,8 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.web.fabric.http.website.Website;
 
+import java.util.function.Supplier;
+
 import static net.minecraft.server.command.CommandManager.literal;
 
 public class WebsitePort {
@@ -15,7 +17,7 @@ public class WebsitePort {
 
     private static int onGetPort(CommandContext<ServerCommandSource> serverCommandSourceCommandContext) {
         Website.getServerPort();
-        serverCommandSourceCommandContext.getSource().sendFeedback(Text.of(String.valueOf(Website.getServerPort())),true);
+        serverCommandSourceCommandContext.getSource().sendFeedback((Supplier<Text>) Text.of(String.valueOf(Website.getServerPort())),true);
         return 1;
     }
 }

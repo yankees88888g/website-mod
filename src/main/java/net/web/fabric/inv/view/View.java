@@ -11,6 +11,7 @@ import net.minecraft.world.dimension.DimensionType;
 import net.web.fabric.WebMain;
 
 import java.util.Objects;
+import java.util.Optional;
 import java.util.UUID;
 
 public class View {
@@ -25,11 +26,11 @@ public class View {
         }
         if (requestedPlayer == null) {
             requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().createPlayer(new GameProfile(UUID.fromString(uuid), player), null);
-            NbtCompound compound = WebMain.getMinecraftServer().getPlayerManager().loadPlayerData(requestedPlayer);
+            Optional<NbtCompound> compound = WebMain.getMinecraftServer().getPlayerManager().loadPlayerData(requestedPlayer);
             if (compound != null) {
-                ServerWorld world = WebMain.getMinecraftServer().getWorld(DimensionType.worldFromDimensionNbt(new Dynamic<>(NbtOps.INSTANCE, compound.get("Dimension"))).result().get());
+                ServerWorld world = WebMain.getMinecraftServer().getWorld(DimensionType.worldFromDimensionNbt(new Dynamic<>(NbtOps.INSTANCE, compound.get())).result().get());
                 if (world != null) {
-                    requestedPlayer.setWorld(world);
+                    requestedPlayer.setServerWorld(world);
                 }
             }
         }

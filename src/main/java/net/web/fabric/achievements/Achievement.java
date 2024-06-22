@@ -1,6 +1,7 @@
 package net.web.fabric.achievements;
 
 import net.minecraft.advancement.Advancement;
+import net.minecraft.advancement.AdvancementEntry;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.web.fabric.WebMain;
 
@@ -22,10 +23,10 @@ public class Achievement {
                 return;
             } else {
                 Ach ach = new Ach(player);
-                Collection<Advancement> advancements = WebMain.getMinecraftServer().getAdvancementLoader().getAdvancements();
-                for (Advancement a : advancements) {
-                    if (a.getDisplay() != null) {
-                        ach.addAch( new AchData(a, requestedPlayer.getAdvancementTracker().getProgress(a).isDone()));
+                Collection<AdvancementEntry> advancements = WebMain.getMinecraftServer().getAdvancementLoader().getAdvancements();
+                for (AdvancementEntry a : advancements) {
+                    if (a.value().display() != null) {
+                        ach.addAch( new AchData(a.value(), requestedPlayer.getAdvancementTracker().getProgress(a).isDone()));
                     }
                 }
                /* for (Advancement a : advancements) {

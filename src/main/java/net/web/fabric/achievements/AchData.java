@@ -12,10 +12,10 @@ public class AchData {
     public boolean done;
 
     public AchData(Advancement advancement, boolean done){
-        this.title = advancement.getDisplay().getTitle().getString();
-        this.des = advancement.getDisplay().getDescription().getString();
-        this.icon = advancement.getDisplay().getIcon();
-        this.id = advancement.getId().toString();
+        this.title = advancement.display().get().getTitle().getString();
+        this.des = advancement.display().get().getDescription().getString();
+        this.icon = advancement.display().get().getIcon();
+        this.id = advancement.display().toString();
         this.done = done;
     }
 }

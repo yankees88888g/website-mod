@@ -7,6 +7,8 @@ import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.text.Text;
 import net.web.fabric.http.website.login.cred.Encryption;
 
+import java.util.function.Supplier;
+
 import static net.minecraft.server.command.CommandManager.*;
 
 public class CreateAccount {
@@ -25,8 +27,8 @@ public class CreateAccount {
 
     public static int onCreateAccount(CommandContext<ServerCommandSource> context) {
         System.out.println("Player: " + context.getSource().getName());
-        Encryption.write(context.getArgument("username", String.class), context.getArgument("password", String.class), false, context.getSource().getPlayer().getUuidAsString(), context.getSource().getPlayer().getEntityName());
-        context.getSource().sendFeedback(Text.of("created account for " + context.getArgument("username", String.class)), true);
+        Encryption.write(context.getArgument("username", String.class), context.getArgument("password", String.class), false, context.getSource().getPlayer().getUuidAsString(), context.getSource().getPlayer().getName().getString());
+        context.getSource().sendFeedback((Supplier<Text>) Text.of("created account for " + context.getArgument("username", String.class)), true);
         return 1;
     }
 }

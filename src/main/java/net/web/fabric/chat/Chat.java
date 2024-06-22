@@ -25,7 +25,7 @@ public class Chat {
         if (isDisabled(requestedPlayer)) {
             return;
         } else {
-            WebMain.getMinecraftServer().getPlayerManager().broadcast(Text.literal("Web-").append(requestedPlayer.getDisplayName()).append(": ").append(msg), MessageType.SYSTEM);
+            WebMain.getMinecraftServer().getPlayerManager().broadcast(Text.literal("Web-").append(requestedPlayer.getDisplayName()).append(": ").append(msg), true);
             return;
         }
     }

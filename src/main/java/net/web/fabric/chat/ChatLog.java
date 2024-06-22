@@ -2,9 +2,9 @@ package net.web.fabric.chat;
 
 import net.minecraft.network.message.MessageType;
 import net.minecraft.network.message.SignedMessage;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.server.filter.FilteredMessage;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.registry.RegistryKey;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +17,7 @@ public class ChatLog {
     public String sender;
     public RegistryKey<MessageType> mt;
 
-    public ChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey, String web, String webMsg) {
+    /*public ChatLog(FilteredMessage<SignedMessage> message, ServerPlayerEntity sender, RegistryKey<MessageType> typeKey, String web, String webMsg) {
         if(web == null || webMsg == null) {
             this.msg = message.filtered().getContent().getString();
             this.sender = sender.getDisplayName().getString();
@@ -30,7 +30,7 @@ public class ChatLog {
             chatLog.remove(0);
         }
         chatLog.add(this);
-    }
+    }*/
 
     public static List<ChatLog> getChatLogs(){
         return chatLog;

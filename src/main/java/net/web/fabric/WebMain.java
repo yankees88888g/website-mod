@@ -40,9 +40,9 @@ public class WebMain implements ModInitializer {
         });
         ServerLifecycleEvents.SERVER_STARTING.register(this::onLogicalServerStarting);
 
-        ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> {
+        /*ServerMessageEvents.CHAT_MESSAGE.register((message, sender, typeKey) -> {
             new ChatLog(message, sender, typeKey, null, null);
-        });
+        });*/
     }
 
     private String strArrayToStr(String[] array) {
