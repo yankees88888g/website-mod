@@ -1,9 +1,7 @@
 package net.web.fabric.chat;
 
-import net.minecraft.network.message.MessageType;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.Text;
+import net.minecraft.network.chat.Component;
+import net.minecraft.server.level.ServerPlayer;
 import net.web.fabric.WebMain;
 
 import java.io.BufferedReader;
@@ -18,19 +16,19 @@ public class Chat {
 
     public static void chat(String player, String uuid, String msg) {
 
-        ServerPlayerEntity requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().getPlayer(player);
+        ServerPlayer requestedPlayer = WebMain.getMinecraftServer().getPlayerList().getPlayerByName(player);
         if (requestedPlayer == null) {
             requestedPlayer = getRequestedPlayer(player, uuid);
         }
         if (isDisabled(requestedPlayer)) {
             return;
         } else {
-            WebMain.getMinecraftServer().getPlayerManager().broadcast(Text.literal("Web-").append(requestedPlayer.getDisplayName()).append(": ").append(msg), true);
+            WebMain.getMinecraftServer().getPlayerList().broadcastSystemMessage(Component.literal("Web-").append(requestedPlayer.getDisplayName()).append(": ").append(msg), true);
             return;
         }
     }
 
-    private static boolean isDisabled(ServerPlayerEntity requestedPlayer) {
+    private static boolean isDisabled(ServerPlayer requestedPlayer) {
         return false;
     }
 

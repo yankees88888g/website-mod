@@ -2,7 +2,7 @@ package net.web.fabric.http.website.handlers.gets;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import net.minecraft.item.ItemStack;
+import net.minecraft.world.item.ItemStack;
 import net.web.fabric.http.website.handlers.HtmlHelper;
 import net.web.fabric.http.website.login.cred.Credentials;
 import net.web.fabric.inv.view.Gui;

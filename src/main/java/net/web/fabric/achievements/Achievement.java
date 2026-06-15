@@ -1,8 +1,7 @@
 package net.web.fabric.achievements;
 
-import net.minecraft.advancement.Advancement;
-import net.minecraft.advancement.AdvancementEntry;
-import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.advancements.AdvancementHolder;
+import net.minecraft.server.level.ServerPlayer;
 import net.web.fabric.WebMain;
 
 import java.util.Collection;
@@ -14,7 +13,7 @@ public class Achievement {
 
     public static void getAchievement(String player, String uuid) {
         try {
-            ServerPlayerEntity requestedPlayer = WebMain.getMinecraftServer().getPlayerManager().getPlayer(player);
+            ServerPlayer requestedPlayer = WebMain.getMinecraftServer().getPlayerList().getPlayerByName(player);
 
             if (requestedPlayer == null) {
                 requestedPlayer = getRequestedPlayer(player, uuid);
@@ -23,10 +22,10 @@ public class Achievement {
                 return;
             } else {
                 Ach ach = new Ach(player);
-                Collection<AdvancementEntry> advancements = WebMain.getMinecraftServer().getAdvancementLoader().getAdvancements();
-                for (AdvancementEntry a : advancements) {
+                Collection<AdvancementHolder> advancements = WebMain.getMinecraftServer().getAdvancements().getAllAdvancements();
+                for (AdvancementHolder a : advancements) {
                     if (a.value().display() != null) {
-                        ach.addAch( new AchData(a.value(), requestedPlayer.getAdvancementTracker().getProgress(a).isDone()));
+                        ach.addAch( new AchData(a.value(), requestedPlayer.getAdvancements().getOrStartProgress(a).isDone()));
                     }
                 }
                /* for (Advancement a : advancements) {
@@ -44,7 +43,7 @@ public class Achievement {
         }
     }
 
-    private static boolean isProtected(ServerPlayerEntity requestedPlayer) {
+    private static boolean isProtected(ServerPlayer requestedPlayer) {
         return false;
     }
 }

@@ -1,6 +1,5 @@
 package net.web.fabric.mod.menu;
 
-import net.minecraft.text.Text;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

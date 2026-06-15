@@ -1,6 +1,6 @@
 package net.web.fabric.achievements;
 
-import net.minecraft.advancement.*;
+import net.minecraft.advancements.*;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;

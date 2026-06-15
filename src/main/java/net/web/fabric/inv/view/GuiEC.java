@@ -1,10 +1,9 @@
 package net.web.fabric.inv.view;
 
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import net.minecraft.world.item.ItemStack;
 
 public class GuiEC {
 

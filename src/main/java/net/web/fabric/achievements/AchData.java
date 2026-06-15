@@ -1,7 +1,7 @@
 package net.web.fabric.achievements;
 
-import net.minecraft.advancement.Advancement;
-import net.minecraft.item.ItemStack;
+import net.minecraft.advancements.Advancement;
+import net.minecraft.world.item.ItemStack;
 
 public class AchData {
 
